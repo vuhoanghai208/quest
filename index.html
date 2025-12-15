@@ -2,450 +2,506 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ôn Tập Sử 12 - Bài 10</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ôn Tập Lịch Sử - Đề Cương Chuẩn</title>
     <style>
-        /* --- CẤU HÌNH GIAO DIỆN (CSS VARIABLES) --- */
+        /* --- CẤU HÌNH GIAO DIỆN --- */
         :root {
             --bg-color: #f0f2f5;
             --container-bg: #ffffff;
-            --text-color: #333333;
-            --border-color: #ddd;
-            --primary-btn: #007bff;
-            --secondary-btn: #6c757d;
+            --text-color: #212529;
+            --primary-btn: #0d6efd;
+            --primary-hover: #0b5ed7;
+            --correct-color: #198754;
+            --wrong-color: #dc3545;
             --option-bg: #f8f9fa;
-            --option-hover: #e9ecef;
-            --correct-bg: #d4edda;
-            --correct-text: #155724;
-            --wrong-bg: #f8d7da;
-            --wrong-text: #721c24;
-            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --option-border: #dee2e6;
+            --highlight: #e7f1ff;
         }
 
-        /* --- DARK MODE VARIABLES --- */
         body.dark-mode {
-            --bg-color: #18191a;
-            --container-bg: #242526;
-            --text-color: #e4e6eb;
-            --border-color: #3e4042;
-            --primary-btn: #4da3ff; /* Sáng hơn chút để nổi trên nền tối */
-            --secondary-btn: #b0b3b8;
-            --option-bg: #3a3b3c;
-            --option-hover: #4e4f50;
-            --correct-bg: #1e4620; /* Xanh đậm cho nền tối */
-            --correct-text: #9be7ac; /* Chữ xanh sáng */
-            --wrong-bg: #5a1e22;   /* Đỏ đậm cho nền tối */
-            --wrong-text: #f5c6cb; /* Chữ đỏ sáng */
-            --shadow: 0 4px 15px rgba(0,0,0,0.5);
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --primary-btn: #375a7f;
+            --primary-hover: #2b4764;
+            --correct-color: #00bc8c;
+            --wrong-color: #e74c3c;
+            --option-bg: #2c2c2c;
+            --option-border: #444;
+            --highlight: #3a3a3a;
         }
 
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: var(--bg-color); 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
             color: var(--text-color);
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            margin: 0; 
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .container { 
-            background: var(--container-bg); 
-            padding: 30px; 
-            border-radius: 12px; 
-            box-shadow: var(--shadow); 
-            width: 90%; 
-            max-width: 700px; /* Mặc định */
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        /* --- THANH CÔNG CỤ (SETTINGS) --- */
-        .toolbar {
+            margin: 0;
+            padding: 20px 0; /* Thêm padding trên dưới */
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
+            justify-content: center;
+            align-items: center; /* Căn giữa màn hình */
+            transition: background 0.3s, color 0.3s;
         }
 
-        .toggle-btn {
-            background: none;
-            border: 2px solid var(--border-color);
+        .container {
+            background: var(--container-bg);
+            /* --- CẬP NHẬT: CHIẾM 80% MÀN HÌNH --- */
+            width: 80%; 
+            max-width: 1600px; /* Giới hạn tối đa để không quá bè trên màn hình siêu rộng */
+            /* ------------------------------------ */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Responsive Text */
+        h1 { font-size: 1.8em; text-align: center; margin: 0; }
+        h2 { font-size: 1.4em; margin: 0; }
+        .question-text { font-size: 1.3em; font-weight: 600; line-height: 1.5; margin: 15px 0; }
+        
+        /* Toolbar */
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .btn-icon { background: none; border: 1px solid var(--option-border); color: var(--text-color); padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 1rem; }
+
+        /* Nút bấm */
+        button { cursor: pointer; border: none; border-radius: 8px; font-family: inherit; transition: all 0.2s; }
+        .btn-mode { width: 100%; padding: 15px; font-size: 1.1rem; font-weight: bold; color: white; margin-top: 10px; }
+        .btn-practice { background-color: var(--correct-color); }
+        .btn-exam { background-color: var(--primary-btn); }
+        .btn-nav { background-color: var(--primary-btn); color: white; padding: 15px 30px; font-size: 1.1rem; display: none; margin-top: 15px; width: 100%; }
+
+        /* Nút 50/50 */
+        .btn-5050 {
+            background-color: #fd7e14; color: white;
+            padding: 8px 15px; border-radius: 20px;
+            font-weight: bold; font-size: 0.9rem;
+            display: none;
+            margin-bottom: 10px;
+            align-self: flex-start;
+        }
+        .btn-5050:disabled { background-color: #ccc; cursor: not-allowed; opacity: 0.6; }
+
+        /* Đáp án */
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; } /* Mặc định 2 cột */
+        .option-btn {
+            background: var(--option-bg);
+            border: 2px solid var(--option-border);
             color: var(--text-color);
-            padding: 5px 10px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            padding: 20px; /* Tăng padding cho nút to hơn */
+            text-align: left;
+            font-size: 1.1em;
+            border-radius: 12px;
+            line-height: 1.4;
+            height: 100%; /* Để các nút cao bằng nhau */
         }
-
-        .zoom-control {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-        }
+        .option-btn:hover:not(:disabled) { background: var(--highlight); }
         
-        input[type=range] {
-            cursor: pointer;
-        }
+        /* Trạng thái đúng sai */
+        .correct { background-color: var(--correct-color) !important; color: white !important; border-color: var(--correct-color) !important; }
+        .wrong { background-color: var(--wrong-color) !important; color: white !important; border-color: var(--wrong-color) !important; }
+        .selected { border-color: var(--primary-btn) !important; background-color: var(--highlight) !important; }
+        .hidden-opt { visibility: hidden; pointer-events: none; } 
 
-        h1, h2 { text-align: center; margin-top: 0; }
-        
-        /* Select & Button Styles */
-        select, button { width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 1px solid var(--border-color); font-size: 1em; cursor: pointer; background-color: var(--container-bg); color: var(--text-color); }
-        button.primary { background-color: var(--primary-btn); color: white; border: none; font-weight: bold; }
-        button.secondary { background-color: var(--secondary-btn); color: white; border: none; font-weight: bold; }
-        button:hover { opacity: 0.9; }
-
-        /* Quiz Styles */
+        /* Màn hình */
         #quiz-screen, #result-screen { display: none; }
-        .question-text { font-size: 1.2em; margin-bottom: 20px; font-weight: 600; line-height: 1.5; }
-        .options { display: flex; flex-direction: column; gap: 10px; }
-        
-        .option-btn { 
-            background: var(--option-bg); 
-            border: 1px solid var(--border-color); 
-            text-align: left; 
-            padding: 15px;
-            transition: all 0.2s; 
-            color: var(--text-color);
-        }
-        .option-btn:hover { background-color: var(--option-hover); }
-        
-        /* Trạng thái đáp án */
-        .correct { background-color: var(--correct-bg) !important; border-color: var(--correct-bg) !important; color: var(--correct-text) !important; }
-        .wrong { background-color: var(--wrong-bg) !important; border-color: var(--wrong-bg) !important; color: var(--wrong-text) !important; }
-        .selected { border: 2px solid var(--primary-btn) !important; background-color: var(--option-hover) !important; }
-        
-        #feedback { margin-top: 15px; font-style: italic; min-height: 24px; text-align: center; font-weight: bold; }
-        #next-btn { margin-top: 20px; display: none; background-color: var(--primary-btn); color: white; border: none; }
+        #feedback { font-weight: bold; text-align: center; min-height: 25px; margin-top: 10px; font-size: 1.2rem; }
 
-        /* Kết quả */
-        .score-display { font-size: 2em; color: #dc3545; font-weight: bold; margin: 20px 0; }
-        .review-list { text-align: left; max-height: 400px; overflow-y: auto; border: 1px solid var(--border-color); padding: 10px; margin-bottom: 20px; border-radius: 8px; }
-        .review-item { border-bottom: 1px solid var(--border-color); padding: 15px 0; }
-        .review-item strong { display: block; margin-bottom: 5px; }
-        
-        /* Scrollbar đẹp hơn */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        /* Review list */
+        .review-box { max-height: 60vh; overflow-y: auto; border: 1px solid var(--option-border); padding: 10px; border-radius: 8px; margin: 15px 0; }
+        .review-item { padding: 10px; border-bottom: 1px solid var(--option-border); }
+        .review-item.good { color: var(--correct-color); }
+        .review-item.bad { color: var(--wrong-color); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%; /* Trên điện thoại thì dùng 95% cho rộng rãi */
+                padding: 15px;
+            }
+            .options-grid { grid-template-columns: 1fr; /* Về 1 cột trên điện thoại */ }
+            h1 { font-size: 1.5em; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container" id="main-box">
     <div class="toolbar">
-        <button class="toggle-btn" onclick="toggleDarkMode()" style="width: auto; margin: 0;">
-            <span id="icon-mode">🌙</span> Chế độ tối
-        </button>
-        <div class="zoom-control">
-            <span>Kích thước:</span>
-            <input type="range" id="zoom-slider" min="12" max="24" value="16" oninput="changeFontSize(this.value)">
+        <button class="btn-icon" onclick="toggleDarkMode()">🌙 Giao diện</button>
+        <div style="font-size: 1rem;">
+            Size: <input type="range" min="16" max="30" value="20" oninput="changeFontSize(this.value)" style="vertical-align: middle;">
         </div>
     </div>
 
     <div id="setup-screen">
-        <h1>Ngân Hàng Câu Hỏi</h1>
-        <label for="lesson-select">Chọn bài học:</label>
-        <select id="lesson-select">
-            </select>
-        <hr style="border-color: var(--border-color);">
-        <p>Chọn chế độ:</p>
-        <button class="secondary" onclick="startQuiz('practice')">📘 Luyện Tập (Sai chọn lại)</button>
-        <button class="primary" onclick="startQuiz('exam')">📝 Kiểm Tra (Lấy điểm)</button>
+        <h1>ÔN TẬP LỊCH SỬ</h1>
+        <h2 style="text-align:center; color: var(--secondary-text); margin-bottom: 20px;">Đề Cương Chuẩn</h2>
+        <p style="text-align:center;">Tổng hợp: 111 câu trắc nghiệm + 8 bài tập đúng sai.</p>
+        <button class="btn-mode btn-practice" onclick="startQuiz('practice')">📘 Luyện Tập (Sai chọn lại)</button>
+        <button class="btn-mode btn-exam" onclick="startQuiz('exam')">📝 Kiểm Tra (Lấy điểm)</button>
     </div>
 
     <div id="quiz-screen">
-        <h2 id="mode-display" style="color: var(--primary-btn);"></h2>
-        <div class="progress">Câu <span id="current-q">1</span> / <span id="total-q">10</span></div>
-        <div class="question-text" id="question-text">Nội dung...</div>
-        <div class="options" id="options-container"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: bold; color: var(--primary-btn); font-size: 1.2em;" id="mode-text"></span>
+            <span style="font-size: 1.2em;">Câu <span id="cur-q">1</span>/<span id="total-q">100</span></span>
+        </div>
+        
+        <div style="height: 8px; background: #ddd; border-radius: 4px; margin: 15px 0; overflow: hidden;">
+            <div id="progress-bar" style="height: 100%; background: var(--primary-btn); width: 0%;"></div>
+        </div>
+
+        <button id="btn-5050" class="btn-5050" onclick="use5050()">🌟 Trợ giúp 50/50</button>
+        
+        <div class="question-text" id="question-text"></div>
+        <div class="options-grid" id="options-area"></div>
         <div id="feedback"></div>
-        <button id="next-btn" onclick="nextQuestion()">Câu tiếp theo ➜</button>
+        
+        <div style="display: flex; justify-content: flex-end;">
+            <button id="next-btn" class="btn-nav" onclick="nextQuestion()">Tiếp theo ➜</button>
+        </div>
     </div>
 
     <div id="result-screen">
-        <h2>Kết Quả</h2>
-        <div class="score-display">Điểm: <span id="final-score">0</span>/10</div>
-        <div class="review-list" id="review-list"></div>
-        <button class="primary" onclick="location.reload()">🔄 Làm lại</button>
+        <h1>Kết Quả</h1>
+        <div style="font-size: 4rem; text-align: center; color: var(--wrong-color); font-weight: bold; margin: 20px 0;">
+            <span id="score-num">0</span><span style="font-size: 2rem; color: var(--text-color);">/10</span>
+        </div>
+        <div class="review-box" id="review-list"></div>
+        <button class="btn-mode btn-exam" onclick="location.reload()">🔄 Làm lại</button>
     </div>
 </div>
 
 <script>
-    // --- DỮ LIỆU CÂU HỎI (SỬ 12 - BÀI 10) ---
-    const database = {
-        "su12_bai10": {
-            title: "Sử 12 - Bài 10: Công cuộc Đổi mới (1986 - nay)",
-            questions: [
-                { q: "Câu 1. Đường lối Đổi mới của Đảng Cộng sản Việt Nam được chính thức đề ra tại Đại hội đại biểu toàn quốc lần thứ mấy?", options: ["Đại hội lần thứ IV (12/1976)", "Đại hội lần thứ V (3/1982)", "Đại hội lần thứ VI (12/1986)", "Đại hội lần thứ VII (6/1991)"], ans: 2 },
-                { q: "Câu 2. Trước năm 1986, mô hình kinh tế của Việt Nam có đặc trưng cơ bản là gì?", options: ["Kinh tế kế hoạch hóa tập trung, quan liêu, bao cấp", "Kinh tế thị trường tự do cạnh tranh", "Kinh tế hàng hóa nhiều thành phần vận động theo thị trường", "Kinh tế thị trường định hướng xã hội chủ nghĩa"], ans: 0 },
-                { q: "Câu 3. Phương châm đối ngoại của Việt Nam trong thời kì Đổi mới được thể hiện qua khẩu hiệu nào?", options: ["“Thêm bạn bớt thù, ưu tiên quan hệ với phe xã hội chủ nghĩa”", "“Việt Nam muốn là bạn, là đối tác tin cậy của các nước”", "“Tập trung hợp tác với các nước trong khu vực Đông Nam Á”", "“Ưu tiên quan hệ với các cường quốc kinh tế hàng đầu thế giới”"], ans: 1 },
-                { q: "Câu 4. Tình hình kinh tế – xã hội Việt Nam cuối những năm 70, đầu những năm 80 của thế kỉ XX được mô tả là:", options: ["Tăng trưởng kinh tế nhanh và bền vững", "Rơi vào tình trạng khủng hoảng, trì trệ kéo dài", "Đời sống vật chất của nhân dân được nâng cao", "Hội nhập sâu rộng với kinh tế khu vực và thế giới"], ans: 1 },
-                { q: "Câu 5. Một trong những nội dung trọng tâm của đường lối Đổi mới về kinh tế do Đại hội VI đề ra là:", options: ["Chỉ cho phép phát triển thành phần kinh tế nhà nước", "Xóa bỏ hoàn toàn các thành phần kinh tế tư nhân", "Xây dựng nền kinh tế hàng hóa gồm nhiều thành phần", "Tiếp tục duy trì cơ chế quản lí kinh tế bao cấp"], ans: 2 },
-                { q: "Câu 6. Sự kiện quốc tế nào cuối những năm 80 của thế kỉ XX đã tác động trực tiếp đến công cuộc Đổi mới ở Việt Nam?", options: ["Cuộc khủng hoảng dầu mỏ trên thế giới", "Sự sụp đổ của mô hình xã hội chủ nghĩa ở Liên Xô và Đông Âu", "Cách mạng khoa học – công nghệ phát triển như vũ bão", "Sự ra đời và lớn mạnh của khối thị trường chung châu Âu"], ans: 1 },
-                { q: "Câu 7. Về chính trị, đường lối Đổi mới của Đảng chủ trương xây dựng nhà nước như thế nào?", options: ["Nhà nước chuyên chính vô sản theo mô hình cũ", "Nhà nước pháp quyền xã hội chủ nghĩa của dân, do dân, vì dân", "Nhà nước quân chủ lập hiến theo kiểu phương Tây", "Nhà nước kế thừa mô hình của các nước tư bản phát triển"], ans: 1 },
-                { q: "Câu 8. Thành tựu quan trọng của Việt Nam trong việc thực hiện Ba chương trình kinh tế lớn giai đoạn 1986-1990 là gì?", options: ["Giải quyết cơ bản được vấn đề an ninh lương thực quốc gia", "Trở thành nước xuất khẩu gạo hàng đầu trên thế giới", "Hoàn thành toàn diện công cuộc công nghiệp hóa đất nước", "Thu hút được nguồn vốn FDI lớn nhất trong khu vực"], ans: 0 },
-                { q: "Câu 9. Nhiệm vụ nào được Đảng Cộng sản Việt Nam xác định là trọng tâm của công cuộc Đổi mới?", options: ["Đổi mới hệ thống chính trị", "Cải cách toàn diện giáo dục", "Phát triển kinh tế", "Mở rộng quan hệ đối ngoại"], ans: 2 },
-                { q: "Câu 10. Đến năm 2000, về đối ngoại, Việt Nam đã đạt được thành tựu nào sau đây?", options: ["Chỉ thiết lập quan hệ với các nước trong khối ASEAN", "Chỉ duy trì quan hệ với các nước xã hội chủ nghĩa truyền thống", "Mới bắt đầu quá trình bình thường hóa quan hệ với Mỹ", "Mở rộng quan hệ ngoại giao với hầu hết các quốc gia trên thế giới"], ans: 3 },
-                { q: "Câu 11. Trong nông nghiệp thời kỳ Đổi mới, chính sách nào đã tạo ra động lực sản xuất cho người nông dân?", options: ["Tiếp tục đẩy mạnh xây dựng các hợp tác xã quy mô lớn", "Giao quyền sử dụng ruộng đất lâu dài cho hộ gia đình, cá nhân", "Nhà nước trực tiếp quản lý và bao tiêu toàn bộ sản phẩm nông nghiệp", "Tập trung toàn bộ tư liệu sản xuất vào kinh tế tập thể"], ans: 1 },
-                { q: "Câu 12. Đại hội nào của Đảng được xem là “bước đột phá đầu tiên” trong quá trình tìm tòi, hình thành đường lối đổi mới?", options: ["Đại hội V (1982)", "Đại hội VI (1986)", "Đại hội VII (1991)", "Đại hội IV (1976)"], ans: 1 },
-                { q: "Câu 13. Nguyên nhân cơ bản và mang tính quyết định, buộc Đảng ta phải đề ra đường lối Đổi mới vào năm 1986 là:", options: ["Xu thế toàn cầu hóa đang diễn ra mạnh mẽ trên thế giới", "Yêu cầu cải thiện quan hệ đối ngoại với các nước tư bản", "Cuộc khủng hoảng kinh tế – xã hội trầm trọng, kéo dài trong nước", "Tác động từ thành công của các cuộc cải cách ở Liên Xô và Trung Quốc"], ans: 2 },
-                { q: "Câu 14. Nội dung nào không phải là điểm đổi mới căn bản về kinh tế được đề ra tại Đại hội VI (1986)?", options: ["Xóa bỏ cơ chế quản lí kinh tế tập trung, quan liêu, bao cấp", "Xây dựng nền kinh tế hàng hoá nhiều thành phần", "Mở rộng quan hệ kinh tế đối ngoại", "Tiếp tục ưu tiên tuyệt đối cho việc phát triển công nghiệp nặng"], ans: 3 },
-                { q: "Câu 15. Điểm khác biệt cơ bản giữa cơ chế kế hoạch hóa tập trung và kinh tế thị trường là gì?", options: ["Vai trò quản lý vĩ mô của Nhà nước đối với nền kinh tế", "Sự đa dạng hóa các hình thức sở hữu tư liệu sản xuất", "Sự vận động của nền kinh tế theo quy luật cung – cầu và cạnh tranh", "Mức độ ưu tiên cho việc phát triển ngành nông nghiệp"], ans: 2 },
-                { q: "Câu 16. Một trong những ý nghĩa trực tiếp của việc Việt Nam bình thường hóa quan hệ với Trung Quốc (1991) và Mĩ (1995) là:", options: ["Mở ra thị trường rộng lớn, thúc đẩy mạnh mẽ hoạt động xuất nhập khẩu", "Giúp Việt Nam gia nhập ngay lập tức các tổ chức kinh tế lớn của thế giới", "Giải quyết triệt để mọi tranh chấp về vấn đề biên giới, lãnh thổ biển đảo", "Thay đổi hoàn toàn cơ cấu của nền kinh tế trong nước theo hướng dịch vụ"], ans: 0 },
-                { q: "Câu 17. Tại sao trong đường lối Đổi mới, Đảng ta xác định đổi mới kinh tế là trọng tâm?", options: ["Vì đổi mới kinh tế là lĩnh vực dễ thực hiện và ít rủi ro hơn đổi mới chính trị", "Vì kinh tế có vai trò quyết định, ổn định kinh tế là cơ sở để giữ vững ổn định chính trị", "Vì đổi mới chính trị sẽ ngay lập tức gây ra những phản ứng tiêu cực từ bên ngoài", "Vì các nước đi trước đã thất bại khi tiến hành đổi mới chính trị trước đổi mới kinh tế"], ans: 1 },
-                { q: "Câu 18. Việc Việt Nam gia nhập ASEAN (1995), APEC (1998) và bình thường hóa quan hệ với các nước lớn là biểu hiện của đường lối đối ngoại nào?", options: ["Đa dạng hóa, đa phương hóa quan hệ quốc tế", "Ưu tiên quan hệ với các nước xã hội chủ nghĩa", "Chỉ hợp tác với các nước trong khu vực châu Á", "Thực hiện chính sách đối ngoại khép kín, tự chủ"], ans: 0 },
-                { q: "Câu 19. Thành tựu trong việc giải quyết các vấn đề xã hội (xóa đói giảm nghèo, giáo dục, y tế) thời kỳ Đổi mới đã chứng tỏ điều gì?", options: ["Việt Nam đã trở thành một quốc gia công nghiệp phát triển", "Tính ưu việt tuyệt đối của mô hình kinh tế thị trường tự do", "Sự phân hóa giàu nghèo trong xã hội Việt Nam đã bị xóa bỏ", "Tăng trưởng kinh tế luôn gắn liền với tiến bộ và công bằng xã hội"], ans: 3 },
-                { q: "Câu 20. Hạn chế lớn nhất của nền kinh tế Việt Nam trong 15 năm đầu Đổi mới (1986 – 2000) là:", options: ["Nền kinh tế phát triển chưa vững chắc, hiệu quả và sức cạnh tranh còn thấp", "Chưa thu hút được bất kỳ nguồn vốn đầu tư trực tiếp nào từ nước ngoài (FDI)", "Tình trạng lạm phát phi mã vẫn tiếp tục kéo dài và không thể kiểm soát được", "Đời sống của đại bộ phận nhân dân vẫn chưa được cải thiện so với trước"], ans: 0 },
-                { q: "Câu 21. Chủ trương xây dựng nền kinh tế hàng hóa nhiều thành phần có ý nghĩa quan trọng như thế nào?", options: ["Xóa bỏ hoàn toàn vai trò chủ đạo và quản lý của kinh tế nhà nước", "Hạn chế sự phát triển của thành phần kinh tế tư nhân và cá thể", "Giải phóng mọi tiềm năng, phát huy nguồn lực của các thành phần kinh tế", "Chỉ tập trung vào việc phát triển các ngành sản xuất hàng tiêu dùng"], ans: 2 },
-                { q: "Câu 22. Nội dung nào không phải là nguyên nhân dẫn đến cuộc khủng hoảng kinh tế-xã hội ở Việt Nam những năm 1975-1985?", options: ["Hậu quả nặng nề của các cuộc chiến tranh xâm lược kéo dài", "Sai lầm trong việc duy trì quá lâu cơ chế tập trung, bao cấp", "Tác động tiêu cực từ xu thế toàn cầu hóa và hội nhập quốc tế", "Sự bao vây, cấm vận của các thế lực thù địch bên ngoài"], ans: 2 },
-                { q: "Câu 23. Việc Việt Nam gia nhập ASEAN (7/1995) đã đánh dấu sự thay đổi căn bản trong chính sách đối ngoại vì:", options: ["Đây là lần đầu tiên trong lịch sử Việt Nam tham gia một tổ chức quốc tế", "Việt Nam đã chuyển từ tình trạng đối đầu sang đối thoại, hợp tác trong khu vực", "Sự kiện này giúp Việt Nam nhận được nguồn viện trợ không hoàn lại lớn nhất", "ASEAN là một liên minh chính trị – quân sự có vai trò quan trọng ở châu Á"], ans: 1 },
-                { q: "Câu 24. Đường lối đối ngoại “rộng mở”, “đa dạng hóa, đa phương hóa quan hệ” của Việt Nam đã:", options: ["Hoàn thành thắng lợi kế hoạch 5 năm đầu tiên (1986 – 1990)", "Giúp Việt Nam trở thành thành viên của Tổ chức Thương mại Thế giới (WTO)", "Góp phần phá vỡ thế bị bao vây về kinh tế, cấm vận về chính trị", "Đưa Việt Nam trở thành ủy viên không thường trực Hội đồng Bảo an LHQ"], ans: 2 },
-                { q: "Câu 25. Thách thức lớn nhất đặt ra cho Việt Nam trong quá trình hội nhập kinh tế quốc tế thời kỳ Đổi mới là gì?", options: ["Sự khác biệt về hệ thống chính trị và ý thức hệ với các nước", "Nguy cơ tụt hậu xa hơn về kinh tế do sức cạnh tranh của nền kinh tế còn yếu", "Các vấn đề an ninh phi truyền thống như khủng bố, thiên tai và dịch bệnh", "Rào cản về ngôn ngữ và sự khác biệt văn hóa trong quá trình giao lưu"], ans: 1 },
-                { q: "Câu 26. Ba chương trình kinh tế lớn được đề ra tại Đại hội VI (lương thực-thực phẩm, hàng tiêu dùng, hàng xuất khẩu) nhằm mục tiêu gì?", options: ["Thay thế hoàn toàn cho đường lối công nghiệp hóa xã hội chủ nghĩa", "Đánh dấu sự từ bỏ mô hình kinh tế kế hoạch hóa một cách triệt để", "Là bước đi lâu dài để xây dựng Việt Nam thành “con rồng kinh tế”", "Cụ thể hóa đường lối đổi mới, giải quyết những vấn đề kinh tế cấp bách"], ans: 3 },
-                { q: "Câu 27. Mối quan hệ giữa đổi mới kinh tế và đổi mới hệ thống chính trị ở Việt Nam được xác định là:", options: ["Đổi mới chính trị phải đi trước một bước để tạo tiền đề cho kinh tế", "Tiến hành đồng thời, song song cả đổi mới kinh tế và đổi mới chính trị", "Lấy đổi mới kinh tế làm trọng tâm và từng bước đổi mới hệ thống chính trị", "Chỉ tập trung toàn lực vào đổi mới kinh tế, không đổi mới hệ thống chính trị"], ans: 2 },
-                { q: "Câu 28. Bài học kinh nghiệm có tính nguyên tắc, xuyên suốt được rút ra từ 15 năm đầu thực hiện công cuộc Đổi mới (1986-2000) là gì?", options: ["Phải kiên định mục tiêu độc lập dân tộc và chủ nghĩa xã hội", "Cần ưu tiên tuyệt đối cho việc thu hút vốn đầu tư nước ngoài bằng mọi giá", "Phải tiến hành cải cách hệ thống chính trị một cách triệt để", "Chỉ nên tập trung vào phát triển các ngành dịch vụ, thương mại"], ans: 0 },
-                { q: "Câu 29. Nguy cơ “tụt hậu xa hơn về kinh tế” mà Đảng ta chỉ ra bắt nguồn sâu xa từ nguyên nhân nào trong bối cảnh Đổi mới và hội nhập?", options: ["Xuất phát điểm của nền kinh tế Việt Nam còn quá thấp sau chiến tranh", "Tác động bất lợi từ cuộc khủng hoảng tài chính châu Á năm 1997", "Sức ép cạnh tranh gay gắt từ các nền kinh tế lớn trên thế giới", "Sự chậm chạp trong đổi mới công nghệ và nâng cao chất lượng nguồn nhân lực"], ans: 0 },
-                { q: "Câu 30. Việc Đảng Cộng sản Việt Nam khởi xướng và lãnh đạo thành công công cuộc Đổi mới đã khẳng định điều gì?", options: ["Năng lực tự đổi mới, tự chỉnh đốn của Đảng để đáp ứng yêu cầu của thực tiễn", "Vai trò lãnh đạo tuyệt đối của Đảng đối với nhà nước và xã hội", "Mọi đường lối của Đảng đề ra đều luôn đúng đắn, không có sai lầm", "Đảng chỉ tập trung vào nhiệm vụ xây dựng hệ thống chính trị vững mạnh"], ans: 0 }
-            ]
-        },
-        "su12_cd_bai6": {
-            title: "Sử 12 Cánh Diều - Bài 6: CM tháng Tám 1945",
-            questions: [
-                { q: "Câu 1. Thắng lợi nào của nhân dân Việt Nam trong thế kỉ XX đã góp phần xóa bỏ chủ nghĩa phát xít trên thế giới?", options: ["Chính quyền Xô viết thành lập", "Hiệp định Giơ ne vơ được ký", "Cách mạng tháng Tám 1945", "Hiệp định Pa-ris được ký kết"], ans: 2 },
-                { q: "Câu 2. Trong cách mạng tháng Tám năm 1945 ở Việt Nam, nhân dân ta giành chính quyền từ:", options: ["thực dân Pháp và đế quốc Mĩ", "thực dân Pháp và tay sai", "thực dân Pháp và phát xít Nhật", "phát xít Nhật và tay sai"], ans: 3 },
-                { q: "Câu 3. Nguyên nhân chủ yếu quyết định thắng lợi của Cách mạng tháng Tám năm 1945 là do:", options: ["sự lãnh đạo tài tình của Đảng, đứng đầu là Chủ tịch Hồ Chí Minh", "dân tộc Việt Nam có truyền thống yêu nước, tinh thần đấu tranh kiên cường bất khuất", "đã tập hợp được lực lượng yêu nước ở mọi mặt trận thống nhất", "quân Đồng minh đã đánh bại phát xít Đức-Nhật trong Chiến tranh thế giới thứ hai"], ans: 0 },
-                { q: "Câu 4. Cách mạng tháng Tám năm 1945 ở Việt Nam thành công đã:", options: ["làm thất bại học thuyết Kennơđi", "xóa bỏ ách thống trị của phát xít Nhật", "làm thất bại học thuyết Aixenhao", "làm thất bại học thuyết Níchxơn"], ans: 1 },
-                { q: "Câu 5. Nội dung nào không phải là ý nghĩa của Cách mạng tháng Tám 1945 ở Việt Nam?", options: ["Mở ra một bước ngoặt vĩ đại trong lịch sử dân tộc Việt Nam", "Buộc Pháp công nhận các quyền dân tộc cơ bản của Việt Nam", "Góp phần chiến thắng phát xít trong Chiến tranh thế giới thứ hai", "Mở đầu kỉ nguyên mới của dân tộc: kỉ nguyên độc lập, tự do"], ans: 1 },
-                { q: "Câu 6. Sự kiện nào dưới đây đã mở đầu kỷ nguyên mới trong lịch sử cách mạng Việt Nam?", options: ["Thắng lợi trong phong trào 1930-1931", "Thắng lợi trong phong trào dân chủ 1936-1939", "Thắng lợi Cách mạng tháng Tám năm 1945", "Thắng lợi của khởi nghĩa từng phần (tháng 3 -> giữa 8-1945)"], ans: 2 },
-                { q: "Câu 7. Hành động thể hiện sự nhạy bén, kịp thời của Đảng Cộng sản Đông Dương trước những chuyến biển của tình hình thế giới vào đầu tháng 8 năm 1945 là:", options: ["thành lập Ủy ban dân tộc giải phóng Việt Nam", "triệu tập Hội nghị toàn quốc của Đảng ở Tân Trào", "đã gấp rút thành lập 19 ban xung phong Nam tiến", "lập Ủy ban khởi nghĩa toàn quốc, ra Quân lệnh số 1"], ans: 1 },
-                { q: "Câu 8. Thắng lợi của nhân dân Việt Nam trong Cách mạng tháng Tám đã có ý nghĩa như thế nào đối với thế giới?", options: ["Góp phần làm đảo lộn và đưa tới thất bại chiến lược toàn cầu của Mỹ", "Cổ vũ các dân tộc thuộc địa và phụ thuộc đấu tranh tự giải phóng", "Góp phần đưa đến sự ra đời của hơn 100 quốc gia độc lập trẻ tuổi", "Xây dựng vững chắc thành trì của phong trào giải phóng dân tộc"], ans: 1 },
-                { q: "Câu 9. Cách mạng tháng Tám năm 1945 ở Việt Nam diễn ra theo hình thái nào sau đây?", options: ["Tổng công kích giành chính quyền", "Bãi công để giành chính quyền", "Tổng khởi nghĩa giành chính quyền", "Chiến tranh cách mạng"], ans: 2 },
-                { q: "Câu 10. Một trong những nguyên nhân chủ quan dẫn tới thắng lợi của Cách mạng tháng Tám (1945) là:", options: ["những thắng lợi của phe Đồng minh chống phát xít", "tinh thần đoàn kết của nhân dân ba nước Đông Dương", "truyền thống yêu nước, tinh thần đoàn kết của nhân dân", "sự giúp đỡ của Liên Xô, Trung Quốc và bạn bè quốc tế"], ans: 2 },
-                { q: "Câu 11. Một trong những nguyên nhân chủ quan dẫn tới thắng lợi của Cách mạng tháng Tám (1945) là:", options: ["Những thắng lợi của phe Đồng minh chống phát xít", "Tinh thần đoàn kết của nhân dân ba nước Đông Dương", "Quá trình chuẩn bị lực lượng chu đáo suốt 15 năm", "Sự giúp đỡ của Liên Xô, Trung Quốc và bạn bè quốc tế"], ans: 2 },
-                { q: "Câu 12. Một trong những nguyên nhân chủ quan dẫn tới thắng lợi của Cách mạng tháng Tám (1945) là:", options: ["những thắng lợi của phe Đồng minh chống phát xít", "tinh thần đoàn kết của nhân dân ba nước Đông Dương", "sự lãnh đạo tài tình của Đảng Cộng sản Đông Dương", "sự giúp đỡ của Liên Xô, Trung Quốc và bạn bè quốc tế"], ans: 2 },
-                { q: "Câu 13. Sự kiện nào dưới đây đã đưa Đảng Cộng sản Đông Dương trở thành Đảng cầm quyền?", options: ["Thắng lợi trong phong trào 1930-1931", "Thắng lợi trong phong trào dân chủ 1936-1939", "Thắng lợi Cách mạng tháng Tám năm 1945", "Thắng lợi của khởi nghĩa từng phần (tháng 3 -> giữa 8-1945)"], ans: 2 },
-                { q: "Câu 14. Trong giai đoạn 1939-1945, sự kiện lịch sử thế giới nào sau đây có ảnh hưởng đến cách mạng Việt Nam?", options: ["Chiến tranh thế giới thứ hai kết thúc", "Liên Xô và Mĩ chấm dứt Chiến tranh lạnh", "Trật tự hai cực Ianta xói mòn và sụp đổ", "Mĩ phát động cuộc Chiến tranh lạnh"], ans: 0 },
-                { q: "Câu 15. Một trong những điểm giống nhau giữa Cách mạng tháng Tám (1945) ở Việt Nam và Cách mạng tháng Mười Nga (1917) là?", options: ["Đưa nhân dân lao động làm chủ đất nước", "Đã góp phần đánh bại chủ nghĩa phát xít", "Đã mở ra thời kỳ hiện đại trong lịch sử", "Làm xoay chuyển lớn cục diện thế giới"], ans: 0 },
-                { q: "Câu 16. Bài học kinh nghiệm nào sau đây được Đảng Cộng sản Đông Dương rút ra về tập hợp, tổ chức lực lượng, phân hóa và cô lập kẻ thù trong Cách mạng tháng Tám năm 1945?", options: ["Thành lập mặt trận thống nhất rộng rãi trên cơ sở liên minh công - nông", "Giải quyết tốt những yêu cầu và nguyện vọng trước mắt của quần chúng", "Tập trung tất cả các lực lượng để tấn công nhiều kẻ thù cùng một lúc", "Triệt để tận dụng những điều kiện khách quan và chủ quan thuận lợi"], ans: 0 },
-                { q: "Câu 17. Một trong những đặc điểm và ưu điểm lớn của Cách mạng tháng Tám năm 1945 ở Việt Nam là gì?", options: ["Cuộc khởi nghĩa vũ trang nhưng diễn ra khá ôn hòa, tránh xung đột đổ máu", "Cuộc khởi nghĩa vũ trang toàn dân quyết liệt giành chính quyền với mọi giá", "Cuộc cách mạng bạo lực khi phong trào cách mạng thế giới đều tạm ngưng", "Cách mạng vô sản đầu tiên ở nước thuộc địa thành công nhanh, ít đổ máu"], ans: 3 },
-                { q: "Câu 18. Khác với Cách mạng tháng Tám năm 1945 ở Việt Nam, Cách mạng tháng Mười ở Nga năm 1917 diễn ra theo hình thái:", options: ["bắt đầu từ thành thị, lấy thành thị làm trung tâm", "nổ ra đồng thời trên cả nước, cả nông thôn và thành thị", "kết hợp hài hòa giữa nông thôn và thành thị", "bắt đầu từ nông thôn, lấy nông thôn bao vây thành thị"], ans: 0 },
-                { q: "Câu 19. Nét tương đồng về hình thức đấu tranh của cách mạng Cuba năm 1959 so với Cách mạng tháng Tám năm 1945 ở Việt Nam là:", options: ["đấu tranh ngoại giao", "đấu tranh chính trị", "đấu tranh vũ trang", "khởi nghĩa từng phần"], ans: 2 },
-                { q: "Câu 20. Nhận xét nào sau đây là đúng về vai trò của lực lượng chính trị trong Cách tháng Tám năm 1945 ở Việt Nam?", options: ["Lực lượng hỗ trợ cho tổng khởi nghĩa tiến lên chiến tranh cách mạng", "Là lực lượng chủ yếu và đông đảo nhất để tiến hành tổng khởi nghĩa", "Là lực lượng nòng cốt, xung kích trong tổng công kích, tổng khởi nghĩa", "Lực lượng nòng cốt, hỗ trợ lực lượng vũ trang tiến lên giành chính quyền"], ans: 1 },
-                { q: "Câu 21. Một trong những nét độc đáo về nghệ thuật giành chính quyền trong cuộc Tổng khởi nghĩa tháng Tám năm 1945 ở Việt Nam là:", options: ["kết hợp lực lượng chính trị và lực lượng vũ trang ba thứ quân", "quá trình giành chính quyền diễn ra nhanh chóng và ít đổ máu", "đồng loạt Tổng khởi nghĩa và tổng công kích trên toàn quốc", "tiến hành Tổng khởi nghĩa ngay khi quân Nhật đảo chính Pháp"], ans: 0 },
-                { q: "Câu 22. Một trong những bài học được rút ra từ Cách mạng tháng Tám năm 1945 có ý nghĩa quan trọng trong công cuộc xây dựng và phát triển đất nước hiện nay là:", options: ["tận dụng, phát huy truyền thống đoàn kết của nhân dân ba nước Đông Dương", "kết hợp xây dựng lực lượng vũ trang với sức mạnh của lực lượng quốc tế", "cần dự đoán chính xác và nhanh chóng nắm bắt thời cơ để giành thắng lợi", "linh hoạt, quyết đoán trong việc kết hợp các hình thức đấu tranh ngoại giao"], ans: 2 },
-                { q: "Câu 23. Nhận định nào sau đây đúng về vai trò của Hồ Chí Minh đối với thắng lợi của Cách mạng tháng Tám 1945?", options: ["Trực tiếp cùng với Đảng lãnh đạo cuộc Cách mạng tháng Tám thắng lợi", "Liên hệ với Trung Quốc, Liên Xô để tranh thủ sự ủng hộ cho cách mạng", "Lập và thông qua danh sách chính phủ lâm thời của nước Việt Nam mới", "Trực tiếp lãnh đạo lực lượng vũ trang đánh chiếm cơ quan đầu não kẻ thù"], ans: 0 },
-                { q: "Câu 24. Bài học rút ra từ sự thành công của cách mạng tháng Tám năm 1945 ở Việt Nam đối với phong trào giải phóng dân tộc ở Đông Nam Á là gì?", options: ["Có sự lãnh đạo của Đảng Cộng sản", "Chớp thời cơ phát lệnh khởi nghĩa", "Vận dụng sáng tạo chủ nghĩa Mác-Lênin", "Có quá trình chuẩn bị chu đáo, kĩ lưỡng, chớp thời cơ"], ans: 3 },
-                { q: "Câu 25. Cách mạng tháng Tám năm 1945 ở Việt Nam được đánh giá là cuộc cách mạng giải phóng dân tộc, đồng thời mang tính dân chủ vì lí do nào sau đây?", options: ["Là một bộ phận của các lực lượng hoà bình, tiến bộ chống chủ nghĩa phát xít", "Đã lật đổ chế độ phong kiến và xoá bỏ hoàn toàn các tàn tích của chế độ cũ", "Hoàn thành mục tiêu chiến lược của cách mạng là độc lập và ruộng đất cho dân cày", "Cuộc cách mạng thực hiện thành công khẩu hiệu “Người cày có ruộng” trên cả nước"], ans: 1 }
-            ]
-        },
-        "su12_bai6_de1": {
-            title: "Sử 12 - Bài 6: CM tháng Tám (Đề 1)",
-            questions: [
-                { q: "Câu 1: Bối cảnh quốc tế nào tạo điều kiện thuận lợi nhất cho Cách mạng tháng Tám năm 1945 ở Việt Nam bùng nổ và thành công?", options: ["Sự suy yếu của hệ thống thuộc địa trên thế giới", "Phong trào giải phóng dân tộc phát triển mạnh mẽ", "Sự giúp đỡ to lớn của các nước xã hội chủ nghĩa", "Nhật Bản đầu hàng Đồng minh, chính quyền thân Nhật suy yếu"], ans: 3 },
-                { q: "Câu 2: Điểm khác biệt căn bản trong chỉ đạo chiến lược của Đảng ở Hội nghị TW 8 (5/1941) so với các giai đoạn trước đó là gì?", options: ["Đề cao nhiệm vụ xây dựng lực lượng vũ trang", "Đặt nhiệm vụ giải phóng dân tộc lên hàng đầu", "Chú trọng xây dựng chính quyền Xô Viết", "Tập trung phát triển lực lượng cách mạng ở nông thôn"], ans: 1 },
-                { q: "Câu 3: Yếu tố nào sau đây thể hiện rõ nhất tính chất dân tộc giải phóng của Cách mạng tháng Tám năm 1945?", options: ["Mục tiêu đánh đổ ách thống trị của Nhật và tay sai, giành độc lập", "Lực lượng tham gia chủ yếu là công nhân và nông dân", "Phương pháp đấu tranh chủ yếu là bạo lực cách mạng", "Kết quả là thiết lập chế độ dân chủ cộng hòa"], ans: 0 },
-                { q: "Câu 4: Trong CM tháng Tám 1945, Ủy ban Dân tộc Giải phóng Việt Nam được thành lập tại sự kiện nào?", options: ["Hội nghị Ban Chấp hành Trung ương Đảng lần thứ 8", "Hội nghị toàn quốc của Đảng tại Tân Trào", "Quốc dân Đại hội Tân Trào", "Lệnh Tổng khởi nghĩa được ban bố"], ans: 2 },
-                { q: "Câu 5: Lực lượng xã hội nào đóng vai trò quyết định vào thắng lợi của Cách mạng tháng Tám năm 1945?", options: ["Giai cấp công nhân", "Giai cấp nông dân", "Đội ngũ trí thức yêu nước", "Khối đại đoàn kết toàn dân tộc (công-nông-binh)"], ans: 3 },
-                { q: "Câu 6: Nội dung nào sau đây phản ánh đúng nghệ thuật chỉ đạo khởi nghĩa của Đảng trong CM tháng Tám 1945?", options: ["Tiến hành đấu tranh chính trị kết hợp đấu tranh vũ trang", "Chớp thời cơ 'ngàn năm có một', phát động Tổng khởi nghĩa", "Xây dựng căn cứ địa cách mạng vững chắc ở nông thôn", "Kết hợp sức mạnh dân tộc với sức mạnh thời đại"], ans: 1 },
-                { q: "Câu 7: Ý nghĩa quốc tế nổi bật nhất của Cách mạng tháng Tám năm 1945 là gì?", options: ["Làm suy yếu chủ nghĩa đế quốc trên thế giới", "Mở ra thời kỳ sụp đổ của chủ nghĩa thực dân cũ", "Cổ vũ mạnh mẽ phong trào giải phóng dân tộc thế giới", "Góp phần vào thắng lợi của phe Đồng minh"], ans: 2 },
-                { q: "Câu 8: Trong giai đoạn 1939-1945, hình thức mặt trận nào được Đảng thành lập để tập hợp lực lượng?", options: ["Mặt trận Dân chủ Đông Dương", "Mặt trận Việt Minh", "Mặt trận Thống nhất Dân tộc Phản đế Đông Dương", "Mặt trận Liên hiệp Quốc dân Việt Nam"], ans: 1 },
-                { q: "Câu 9: Sự kiện lịch sử nào trực tiếp dẫn đến việc Đảng quyết định phát động Tổng khởi nghĩa tháng Tám năm 1945?", options: ["Pháp đầu hàng Đức", "Đức tấn công Liên Xô", "Nhật đảo chính Pháp", "Nhật Bản đầu hàng Đồng minh"], ans: 3 },
-                { q: "Câu 10: So sánh CM tháng Tám 1945 với các cuộc cách mạng tư sản điển hình, điểm khác biệt cơ bản nhất là gì?", options: ["Về phương pháp đấu tranh", "Về giai cấp lãnh đạo", "Về nhiệm vụ chủ yếu và động lực chính", "Về hình thức chính quyền sau cách mạng"], ans: 1 },
-                { q: "Câu 11: Bài học kinh nghiệm nào từ Cách mạng tháng Tám năm 1945 vẫn còn giá trị trong sự nghiệp bảo vệ Tổ quốc hiện nay?", options: ["Phát huy sức mạnh của khối đại đoàn kết toàn dân tộc", "Xây dựng lực lượng vũ trang nhân dân hùng mạnh", "Tăng cường sự lãnh đạo của Đảng Cộng sản", "Giữ vững độc lập tự chủ trong đường lối đối ngoại"], ans: 0 },
-                { q: "Câu 12: Trong Cách mạng tháng Tám năm 1945, khẩu hiệu nào thể hiện mục tiêu trước mắt và cấp bách nhất?", options: ["“Tịch thu ruộng đất của địa chủ chia cho dân cày”", "“Độc lập dân tộc”", "“Ruộng đất về tay dân cày”", "“Dân chủ và tự do”"], ans: 1 },
-                { q: "Câu 13: Nhận xét nào đúng về vai trò của Đảng Cộng sản Đông Dương trong Cách mạng tháng Tám năm 1945?", options: ["Đề ra đường lối đấu tranh phù hợp với từng giai đoạn", "Xây dựng được lực lượng vũ trang cách mạng", "Tập hợp được khối đại đoàn kết dân tộc", "Lãnh đạo toàn diện, đưa cách mạng đến thắng lợi quyết định"], ans: 3 },
-                { q: "Câu 14: Thời cơ “ngàn năm có một” của Cách mạng tháng Tám năm 1945 được thể hiện rõ nhất ở khoảng thời gian nào?", options: ["Từ khi Nhật đảo chính Pháp đến trước khi Nhật đầu hàng", "Từ sau Hội nghị Potsdam đến trước khi Nhật đầu hàng", "Sau khi Nhật đầu hàng đến trước khi quân Đồng minh vào", "Trong suốt quá trình diễn ra Chiến tranh thế giới thứ hai"], ans: 2 },
-                { q: "Câu 15: Điểm tương đồng giữa Cách mạng tháng Tám năm 1945 ở Việt Nam và Cách mạng tháng Mười Nga năm 1917 là gì?", options: ["Lật đổ chính quyền phản động, xây dựng nhà nước nhân dân", "Sử dụng bạo lực cách mạng để giành chính quyền", "Có sự giúp đỡ to lớn từ bên ngoài", "Đều diễn ra trong bối cảnh chiến tranh thế giới"], ans: 0 },
-                { q: "Câu 16: Nguyên nhân sâu xa dẫn đến Cách mạng tháng Tám năm 1945 là gì?", options: ["Ảnh hưởng của Chiến tranh thế giới thứ hai", "Mâu thuẫn dân tộc sâu sắc với Pháp, Nhật", "Sự lãnh đạo tài tình của Đảng Cộng sản Đông Dương", "Truyền thống yêu nước, bất khuất của dân tộc Việt Nam"], ans: 3 },
-                { q: "Câu 17: Trong “Chỉ thị Nhật - Pháp bắn nhau...”, Đảng xác định kẻ thù chính của nhân dân ta là ai?", options: ["Thực dân Pháp", "Đế quốc Mỹ", "Phát xít Nhật", "Địa chủ phong kiến"], ans: 2 },
-                { q: "Câu 18: Hình thức khởi nghĩa chủ yếu trong Cách mạng tháng Tám năm 1945 ở Việt Nam là gì?", options: ["Khởi nghĩa từng phần", "Đấu tranh chính trị hòa bình", "Chiến tranh du kích", "Tổng khởi nghĩa giành chính quyền"], ans: 3 },
-                { q: "Câu 19: Một trong những đặc điểm nổi bật của CM tháng Tám 1945 là quá trình giành chính quyền diễn ra như thế nào?", options: ["Nhanh chóng, ít đổ máu, bằng hòa bình là chủ yếu", "Quyết liệt, đổ máu, bằng đấu tranh vũ trang là chủ yếu", "Dần dần, từ nông thôn tiến vào thành thị", "Phải trải qua nhiều giai đoạn đấu tranh phức tạp"], ans: 0 },
-                { q: "Câu 20: Tổ chức nào đóng vai trò là chính quyền cách mạng lâm thời sau Cách mạng tháng Tám năm 1945?", options: ["Xô Viết công nông binh", "Ủy ban Khởi nghĩa toàn quốc", "Ủy ban Dân tộc Giải phóng Việt Nam", "Mặt trận Việt Minh"], ans: 2 },
-                { q: "Câu 21: Điểm khác biệt cơ bản giữa Cương lĩnh đầu tiên (1930) và Luận cương chính trị (10/1930) là ở yếu tố nào?", options: ["Về giai cấp lãnh đạo cách mạng", "Về nhiệm vụ chiến lược của cách mạng", "Về lực lượng cách mạng", "Về phương pháp đấu tranh"], ans: 2 },
-                { q: "Câu 22: Trong CM tháng Tám, các Ủy ban nhân dân được thành lập ở địa phương có vai trò gì?", options: ["Tổ chức lực lượng vũ trang", "Phát triển kinh tế, văn hóa", "Xây dựng hậu phương vững chắc", "Đại diện chính quyền ở địa phương, quản lý xã hội"], ans: 3 },
-                { q: "Câu 23: Sự kiện nào đánh dấu sự kết thúc của chế độ phong kiến Việt Nam?", options: ["Cách mạng tháng Tám thành công", "Nước Việt Nam Dân chủ Cộng hòa ra đời", "Vua Bảo Đại tuyên bố thoái vị", "Tổng tuyển cử bầu Quốc hội khóa I"], ans: 2 },
-                { q: "Câu 24: Điểm yếu cơ bản nhất của chính quyền Trần Trọng Kim trước Cách mạng tháng Tám năm 1945 là gì?", options: ["Không có tiềm lực kinh tế", "Chỉ là tay sai của Nhật, không có thực quyền", "Không được nhân dân ủng hộ", "Lực lượng quân sự yếu kém"], ans: 1 },
-                { q: "Câu 25: Mục tiêu chiến lược mà Đảng Cộng sản Đông Dương xác định trong giai đoạn 1939-1945 là gì?", options: ["Giải phóng dân tộc", "Cải cách ruộng đất", "Xây dựng chủ nghĩa xã hội", "Thống nhất đất nước"], ans: 0 },
-                { q: "Câu 26: Việc thành lập các đội Việt Nam Giải phóng quân có ý nghĩa gì?", options: ["Đánh dấu sự ra đời của quân đội chính quy", "Tạo điều kiện thuận lợi để đấu tranh chính trị", "Xây dựng lực lượng vũ trang nòng cốt cho Tổng khởi nghĩa", "Mở rộng căn cứ địa cách mạng"], ans: 2 },
-                { q: "Câu 27: Hội nghị toàn quốc của Đảng (8/1945) đã quyết định vấn đề quan trọng nào?", options: ["Thông qua kế hoạch xây dựng chế độ mới", "Quyết định phát động Tổng khởi nghĩa giành chính quyền", "Bầu ra Chính phủ lâm thời", "Đề ra đường lối kháng chiến chống Pháp"], ans: 1 },
-                { q: "Câu 28: Nhận định nào phản ánh đúng vai trò của quần chúng nhân dân trong Cách mạng tháng Tám?", options: ["Lực lượng nòng cốt của cách mạng", "Lực lượng xung kích trên mặt trận quân sự", "Lực lượng hậu thuẫn vững chắc cho Đảng", "Lực lượng quyết định thắng lợi của cách mạng"], ans: 3 },
-                { q: "Câu 29: Ý nghĩa lịch sử nào sau đây KHÔNG thuộc về Cách mạng tháng Tám năm 1945?", options: ["Mở ra kỷ nguyên độc lập, tự do cho dân tộc", "Lật đổ chế độ phong kiến, thuộc địa", "Hoàn thành cuộc CM dân tộc dân chủ nhân dân cả nước", "Cổ vũ phong trào giải phóng dân tộc thế giới"], ans: 2 },
-                { q: "Câu 30: Trong Tuyên ngôn Độc lập, Chủ tịch Hồ Chí Minh đã khẳng định quyền gì của dân tộc Việt Nam?", options: ["Quyền bình đẳng và bác ái", "Quyền tự do, độc lập và mưu cầu hạnh phúc", "Quyền dân chủ và cộng hòa", "Quyền sống, quyền tự do và quyền sở hữu"], ans: 1 }
-            ]
-        }
-    };
+    // --- DỮ LIỆU CÂU HỎI ---
+    const questionBank = [
+        {q: "Câu 1. Nội dung nào sau đây là nhân tố hàng đầu bảo đảm cho mọi thắng lợi của cách mạng Việt Nam (từ năm 1930 đến năm 1975)?", o: ["Sự ủng hộ của các dân tộc yêu chuộng hoà bình trên thế giới.", "Truyền thống yêu nước và quyết đánh thắng kẻ thù của dân tộc.", "Truyển thống đoàn kết của dân tộc qua các mặt trận thống nhất.", "Vai trò lãnh đạo của Đảng với đường lối khoa học và sáng tạo."], a: 3},
+        {q: "Câu 2. Sách lược ngoại giao của Chủ tịch Hồ Chí Minh và Chính phủ Việt Nam Dân chủ Cộng hòa trong năm 1946 đã", o: ["phá vỡ thế bị bao vây cô lập của cách mạng Việt Nam.", "từng bước loại bỏ bớt thế lực ngoại xâm và nội phản.", "giúp Việt Nam ngăn chặn được mọi nguy cơ xung đột với Pháp.", "giải quyết được những mục tiêu chiến lược của cách mạng."], a: 0},
+        {q: "Câu 3. Trong những năm 1965-1968, thắng lợi nào sau đây của quân dân miền Nam đã mở ra khả năng đánh bại chiến lược Chiến tranh cục bộ của Mỹ?", o: ["Việt Bắc.", "Vạn Tường.", "Cao Bằng.", "Đoan Hùng."], a: 1},
+        {q: "Câu 4. Sự ra đời tổ chức Hiệp ước Bắc Đại Tây Dương (NATO, 1949) và tổ chức Hiệp ước Vácsava (1955) là hệ quả trực tiếp của", o: ["cuộc Chiến tranh lạnh do Mỹ phát động.", "xung đột vũ trang giữa Tây Âu và Đông Âu.", "các cuộc chiến tranh cục bộ trên thế giới.", "chiến lược Ngăn đe thực tế của Mỹ."], a: 0},
+        {q: "Câu 5. Trong cuộc kháng chiến chống thực dân Pháp (1945-1954), cách mạng Việt Nam đã nhận được sự hỗ trợ tích cực từ nước xã hội chủ nghĩa nào sau đây?", o: ["Liên Xô.", "Ấn Độ.", "Thái Lan.", "Hà Lan."], a: 0},
+        {q: "Câu 6. Giai đoạn (1945-1954), nhân dân Việt Nam đã giành được thắng lợi nào dưới đây?", o: ["Chiến thắng An Lão.", "Chiến thắng Ấp Bắc.", "Chiến thắng Vạn Tường.", "Chiến dịch Việt Bắc."], a: 3},
+        {q: "Câu 7. Nội dung nào sau đây là nhân tố hàng đầu bảo đảm cho thắng lợi của công cuộc Đổi mới của Việt Nam?", o: ["Những bài học từ Liên Xô và Trung Quốc.", "Vai trò lãnh đạo của Đảng Cộng sản Việt Nam.", "Viện trợ có hiệu quả của Liên hợp quốc.", "Mỹ chủ động xóa bỏ bao vây và cấm vận."], a: 1},
+        {q: "Câu 8. Đường lối đổi mới toàn diện và đồng bộ đất nước do Đảng Cộng sản Việt Nam tiến hành lần đầu tiên được thông qua tại Đại hội đại biểu toàn quốc", o: ["lần thứ IV (1976).", "lần thứ V (1982).", "lần thứ VI (1986).", "lần thứ VII (1991)."], a: 2},
+        {q: "Câu 9. Nội dung nào sau đây là thách thức trong nội khối của Cộng đồng ASEAN?", o: ["Các nước lớn cạnh tranh ảnh hưởng.", "Vấn đề biến đổi khí hậu toàn cầu.", "Sự đa dạng về chế độ chính trị.", "Vấn đề ô nhiễm môi trường."], a: 2},
+        {q: "Câu 10. Sau Chiến tranh lạnh, nhân tố nào sau đây đóng vai trò quyết định sức mạnh tổng hợp của quốc gia?", o: ["Sức mạnh chính trị - đối ngoại.", "Thực lực kinh tế và khoa học – kĩ thuật.", "Sức mạnh chính trị - quân sự.", "Sự phát triển văn hoá - giáo dục."], a: 1},
+        {q: "Câu 11. Trong thời kì 1954-1975, nước Việt Nam Dân chủ Cộng hòa không có hoạt động đối ngoại nào sau đây?", o: ["Củng cố quan hệ với các nước xã hội chủ nghĩa.", "Đẩy mạnh hoạt động đối ngoại nhân dân.", "Gia nhập Tổ chức Thương mại Thế giới.", "Tăng cường khối đoàn kết ba nước Đông Dương."], a: 2},
+        {q: "Câu 12. Đại hội toàn quốc lần thứ VI của Đảng (12/1986) đề ra quan điểm đổi mới là", o: ["đảm bảo chắc thắng.", "thần tốc, táo bạo.", "giải phóng đất đai.", "toàn diện và đồng bộ."], a: 3},
+        {q: "Câu 13. Một trong những trọng tâm cơ bản của Đổi mới kinh tế là", o: ["Tư duy mở cửa, phát triển kinh tế đối ngoại.", "Tư duy đóng cửa với thế giới tư bản chủ nghĩa.", "Tư duy chỉ quan hệ với các nước xã hội chủ nghĩa.", "Tư duy quản lí tập trung, quan liệu, kế hoạch."], a: 0},
+        {q: "Câu 14. Đường lối đổi mới đất nước của Đảng Cộng sản Việt Nam (1996 – 2006) có nội dung nào sau đây?", o: ["Bước đầu xoá bỏ cơ chế quản lí tập trung, quan liêu, bao cấp.", "Ban hành hiến pháp, tăng cường quyền làm chủ của nhân dân.", "Chú trọng ngoại giao phá vây, phá thế bị bao vây, bị cấm vận.", "Tiếp tục đổi mới cơ chế quản lí kinh tế và chủ động hội nhập."], a: 3},
+        {q: "Câu 15. Điều kiện tiên quyết nào sau đây để các nước Đông Nam Á có thể thành lập tổ chức ASEAN?", o: ["Có nền kinh tế phát triển.", "Liên minh chặt chẽ với Mỹ.", "Lật đổ chế độ phong kiến.", "Giành được độc lập dân tộc."], a: 3},
+        {q: "Câu 16. Nội dung nào sau đây là ý nghĩa lịch sử của cuộc đấu tranh bảo vệ Tổ quốc từ sau tháng 4-1975 đến nay?", o: ["Tạo điều kiện thuận lợi mở đầu công cuộc xây dựng chủ nghĩa xã hội ở Đông Nam Á.", "Bảo vệ vững chắc độc lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ quốc gia.", "Góp phần bảo vệ hoà bình của tổ chức ASEAN và Cộng đồng ASEAN.", "Thể hiện tinh thần đoàn kết chiến đấu của các nước Đông Dương."], a: 1},
+        {q: "Câu 17. Nhận xét nào sau đây là đúng về vai trò của lực lượng chính trị trong Cách mạng tháng Tám năm 1945 ở Việt Nam?", o: ["Lực lượng hỗ trợ cho tổng khởi nghĩa tiến lên chiến tranh cách mạng.", "Là lực lượng chủ yếu và đông đảo nhất để tiến hành tổng khởi nghĩa.", "Là lực lượng nòng cốt, xung kích trong tổng công kích, tổng khởi nghĩa.", "Lực lượng nòng cốt, hỗ trợ lực lượng vũ trang tiến lên giành chính quyền."], a: 1},
+        {q: "Câu 18. Văn bản nào đã quyết định chính thức thành lập Cộng đồng ASEAN?", o: ["Tuyên bố Ba-li II (2003).", "Hiến chương ASEAN (2007).", "Tuyên bố Cu-a-la Lăm-pơ (2015).", "Tầm nhìn Cộng đồng ASEAN 2025 (2016)."], a: 2},
+        {q: "Câu 19. Sự kiện nào sau đây đánh dấu cuộc kháng chiến chống thực dân Pháp của nhân dân Việt Nam (1945 – 1954) hoàn toàn thắng lợi?", o: ["Hiệp định Pa-ri được kí kết.", "Hiệp định Giơ-ne-vơ được kí kết.", "Chiến dịch Điện Biên Phủ thắng lợi.", "Pháp phải đàm phán tại Giơ-ne-vơ."], a: 1},
+        {q: "Câu 20. Nội dung nào dưới đây là nhân tố quyết định sự thành công của công cuộc Đổi mới đất nước từ năm 1986 đến nay", o: ["những bài học từ Liên Xô và Trung Quốc.", "viện trợ to lớn, cần thiết từ Liên Hợp quốc.", "Mỹ chủ động xóa bỏ bao vây và cấm vận.", "vai trò lãnh đạo của Đảng Cộng sản Việt Nam."], a: 3},
+        {q: "Câu 21. Trong giai đoạn 1954-1975, thắng lợi nào dưới đây đã chuyển cách mạng miền Nam từ thế giữ gìn lực lượng sang thế tiến công?", o: ["“Đồng khởi”.", "“Người cày có ruộng”", "“Dạy tốt - Học tốt”.", "“ Xóa đói- Giảm nghèo”."], a: 0},
+        {q: "Câu 22. Trọng tâm của đường lối Đổi mới mà Đảng Cộng sản Việt Nam đề ra tại Đại hội lần VI (12/ 1986) là", o: ["kinh tế.", "chính trị.", "văn hóa.", "quân sự."], a: 0},
+        {q: "Câu 23. Trong giai đoạn từ năm 1986-1995, cán cân kinh tế Việt Nam có sự dịch chuyển theo hướng từ nhập siêu sang", o: ["xuất siêu.", "phát triển.", "khủng hoảng.", "tái thiết."], a: 0},
+        {q: "Câu 24. Đại hội đại biểu toàn quốc lần thứ II của Đảng Cộng sản Đông Dương năm 1951 đã quyết định", o: ["đưa Đảng ra hoạt động công khai với tên gọi Đảng Lao động Việt Nam.", "đưa Đảng ra hoạt động công khai với tên gọi Đảng Cộng sản Việt Nam.", "mở cuộc Tiến công chiến lược Đông - Xuân 1952-1953.", "thành lập Liên minh nhân dân Việt - Xiêm - Lào."], a: 0},
+        {q: "Câu 25. Chiến dịch Điện Biên Phủ (1954) của quân dân Việt Nam đã", o: ["đập tan những nỗ lực quân sự của Pháp.", "buộc Mỹ phải đưa quân vào miền Nam.", "làm phá sản kế hoạch “đánh nhanh, thắng nhanh\" của Pháp.", "buộc Pháp và Mỹ tham gia đàm phán tại Hội nghị Pa-ri."], a: 3},
+        {q: "Câu 26. Mối quan hệ của Đảng, Nhà nước với Nhân dân ngày càng được tăng cường theo quy định của", o: ["Tư pháp.", "Hiến pháp.", "Hành pháp.", "Lập pháp."], a: 1},
+        {q: "Câu 27. Năm 1999, quốc gia nào sau đây được kết nạp, trở thành thành viên thứ 10 của Hiệp hội các quốc gia Đông Nam Á (ASEAN)?", o: ["Bru-nây.", "Mi-an-ma.", "Cam-pu-chia.", "Lào."], a: 2},
+        {q: "Câu 28. Nội dung nào dưới đây là trụ cột của Cộng đồng ASEAN?", o: ["Cộng đồng than thép Châu Âu.", "Cộng đồng Văn hóa – xã hội.", "Cộng đồng năng lượng Châu Âu.", "Cộng đồng kinh tế Châu Âu."], a: 1},
+        {q: "Câu 29. Tổ chức Liên hợp quốc được thành lập (1945) có nhiệm vụ cơ bản nào sau đây?", o: ["Duy trì hòa bình và an ninh thế giới.", "Tiêu diệt chế độ phát xít ở châu Âu.", "Tiêu diệt chủ nghĩa khủng bố ở Mỹ.", "Xóa bỏ chế độ thực dân ở châu Phi."], a: 0},
+        {q: "Câu 30. “Toàn bộ Đông Nam Á sẽ là một cộng đồng ASEAN... gắn bó với nhau bằng một bản sắc chung...\" là nội dung của văn kiện nào?", o: ["Tầm nhìn ASEAN 2020.", "Hiệp ước Ba-li.", "Tuyên bố về sự hoà hợp ASEAN.", "Tuyên bố Băng Cốc."], a: 0},
+        {q: "Câu 31. Quốc gia nào tham gia sáng lập Hiệp hội các quốc gia Đông Nam Á (ASEAN) vào năm 1967?", o: ["Bru-nây.", "Việt Nam.", "Thái Lan.", "Lào."], a: 2},
+        {q: "Câu 32. Ý tưởng thành lập Cộng đồng ASEAN được chính thức khẳng định trong văn bản nào?", o: ["Tuyên bố Băng Cốc (1967).", "Tuyên bố Ba-li I (1976).", "Tuyên bố Ba-li II (2003).", "Tầm nhìn ASEAN 2020 (1997)."], a: 3},
+        {q: "Câu 33. Sau năm 1975, nhân dân Việt Nam tiến hành cuộc đấu tranh bảo vệ Tổ quốc ở vùng biên giới Tây Nam chống lại kẻ thù nào sau đây?", o: ["Quân Pôn Pốt.", "Đế quốc Mỹ.", "Thực dân Pháp.", "Phát xít Nhật."], a: 0},
+        {q: "Câu 34. Kế hoạch triển khai cụ thể để xây dựng Cộng đồng ASEAN được nêu rõ trong văn bản nào?", o: ["Tuyên bố về sự hoà hợp ASEAN II thông qua năm 2003.", "Hiến chương ASEAN thông qua năm 2007.", "Lộ trình xây dựng Cộng đồng ASEAN (2009-2015) thông qua năm 2009.", "Kế hoạch Tổng thể về Kết nối ASEAN (MPAC) thông qua năm 2010."], a: 2},
+        {q: "Câu 35. Bài học được rút ra từ các cuộc đấu tranh bảo vệ Tổ quốc (từ năm 1945 đến nay) có giá trị to lớn hiện nay là", o: ["tăng cường khối đại đoàn kết toàn dân.", "liên minh chặt chẽ với Liên Xô, Trung Quốc.", "gia nhập vào các khối liên minh quân sự.", "thiết lập quan hệ chiến lược với tất cả các nước"], a: 0},
+        {q: "Câu 36. Cơ quan giữ vai trò trọng yếu trong việc thực hiện mục tiêu duy trì hòa bình và an ninh thế giới của Liên hợp quốc là", o: ["Hội đồng Quản thác.", "Hội đồng Bảo an.", "Hội đồng Kinh tế và Xã hội.", "Hội đồng Tòa án tối cao."], a: 1},
+        {q: "Câu 37. Cơ quan giữ vai trò trọng yếu trong việc thực hiện mục tiêu duy trì hòa bình và an ninh thế giới của Liên hợp quốc là", o: ["Hội đồng Quản thác.", "Hội đồng Tòa án tối cao.", "Hội đồng Kinh tế và Xã hội.", "Hội đồng Bảo an."], a: 3},
+        {q: "Câu 38. Nội dung nào sau đây phản ánh đúng một trong những nguyên nhân khách quan dẫn đến thắng lợi của Cách mạng tháng Tám năm 1945 ở Việt Nam", o: ["Sự ủng hộ, giúp đỡ vật chất và tinh thần của phe xã hội chủ nghĩa.", "Thắng lợi của phe Đồng minh trong cuộc chiến chống chủ nghĩa phát xít.", "Vai trò lãnh đạo sáng suốt, sáng tạo của Đảng Cộng sản Đông Dương.", "Tinh thần yêu nước, đoàn kết trong đấu tranh của nhân dân Việt Nam."], a: 1},
+        {q: "Câu 39. Nhận xét nào sau đây là đúng về Cách mạng tháng Tám năm 1945 ở Việt Nam?", o: ["Cuộc cách mạng có tính chất cải lương.", "Cuộc cách mạng có tính chất nhân dân.", "Cuộc cách mạng có tính chất dân chủ điển hình.", "Cuộc cách mạng có tính chất bất bạo động."], a: 1},
+        {q: "Câu 40. Thắng lợi quân sự tiêu biểu nào sau đây làm phá sản hoàn toàn kế hoạch “đánh nhanh, thắng nhanh\" của thực dân Pháp?", o: ["Cuộc chiến đấu ở các đô thị phía bắc vĩ tuyến 16.", "Chiến dịch Việt Bắc thu – đông năm 1947.", "Chiến dịch Biên giới thu – đông năm 1950.", "Chiến dịch Điện Biên Phủ năm 1954."], a: 1},
+        {q: "Câu 41. Sau năm 1975, nhân dân Việt Nam tiến hành cuộc đấu tranh bảo vệ Tổ quốc ở vùng biên giới phía Bắc chống lại kẻ thù nào sau đây?", o: ["Quân Trung Quốc.", "Đế quốc Mỹ.", "Thực dân Pháp.", "Phát xít Nhật."], a: 0},
+        {q: "Câu 42. Trong giai đoạn 1945 – 1954, chiến dịch nào dưới đây được ca ngợi là “Chiến dịch làm chấn động năm châu, vang động địa cầu”?", o: ["Việt Bắc thu - đông năm 1947.", "Điện Biên Phủ năm 1954.", "Biên giới thu - đông năm 1950.", "Trung Lào năm 1953."], a: 1},
+        {q: "Câu 43. Trong giai đoạn 1967 – 1976, Hiệp hội các quốc gia Đông Nam Á (ASEAN) coi trọng vấn đề chính trị - an ninh vì một trong những lí do nào sau đây?", o: ["Mỹ bắt đầu có những hành động can thiệp, dính líu vào Đông Dương.", "Cuộc Chiến tranh lạnh đã và đang tác động sâu sắc đến nhiều nước.", "Xu thế toàn cầu hoá xuất hiện và có những bước phát triển mạnh mẽ.", "Việc lập lại hoà bình ở Cam-pu-chia trở thành tâm điểm của khu vực."], a: 1},
+        {q: "Câu 44. Nội dung nào sau đây phản ánh đúng ý nghĩa của cuộc đấu tranh bảo vệ Tổ quốc (tử sau tháng 4-1975 đến cuối những năm 80 của thế kỉ XX) ở Việt Nam?", o: ["Góp phần giải trừ chủ nghĩa thực dân và xoá bỏ Trật tự thế giới hai cực I-an-ta.", "Bảo vệ vững chắc Tổ quốc, bảo vệ cuộc sống của các tầng lớp nhân dân.", "Góp phần vào quá trình giải trừ chủ nghĩa thực dân của nhân dân thế giới.", "Duy trì hoà bình và ổn định, hoàn toàn không có tổn thất về vật chất."], a: 1},
+        {q: "Câu 45. “Xây dựng một môi trường hoà bình và an ninh cho phát triển ở khu vực Đông Nam Á” là một trong những mục tiêu của", o: ["Cộng đồng Kinh tế - Tài chính ASEAN.", "Cộng đồng Văn hoá - Xã hội ASEAN.", "Cộng đồng Văn hoá - Thể thao ASEAN.", "Cộng đồng Chính trị - An ninh ASEAN"], a: 3},
+        {q: "Câu 46. Thành phần kinh tế nào sau đây giữ vai trò chủ đạo trong nền kinh tế Việt Nam?", o: ["Tư nhân.", "Nhà nước.", "Cá thể.", "Nước ngoài."], a: 1},
+        {q: "Câu 47. Sự kiện nào sau đây trong giai đoạn 1954 – 1960 đánh dấu bước phát triển nhảy vọt của cách mạng miền Nam?", o: ["Phong trào Đồng khởi.", "Phong trào chống phá bình định.", "Phong trào phá ấp chiến lược.", "Phong trào “Ba sẵn sàng\"."], a: 0},
+        {q: "Câu 48. Thắng lợi của Cách mạng tháng Tám năm 1945 ở Việt Nam có ý nghĩa quốc tế nào sau đây?", o: ["Mỡ đầu quá trình sụp đổ của chủ nghĩa tư bản.", "Thúc đẩy sự ra đời của hệ thống xã hội chủ nghĩa.", "Góp phần vào quá trình làm suy yếu phát xít Nhật.", "Góp phần vào chiến thắng chủ nghĩa phát xít."], a: 3},
+        {q: "Câu 49. Đại hội đại biểu lần thứ VI (1986) của Đảng Cộng sản Việt Nam đã", o: ["đưa đất nước thoát khỏi khủng hoảng kinh tế.", "đề ra đường lối đổi mới toàn diện đất nước.", "đề ra bản Hiếp pháp của nước Việt Nam mới.", "mở đầu thời kỳ quá độ lên chủ nghĩa xã hội."], a: 1},
+        {q: "Câu 50. Trong Đại hội đại biểu lần thứ VI (1986), Đảng Cộng sản Việt Nam đã đề ra nhiệm vụ chiến lược nào sau đây?", o: ["Giúp đỡ các nước xã hội chủ nghĩa tiến hành cải tổ.", "Tham gia vào các tổ chức khu vực và tổ chức quốc tế.", "Chấm dứt tình trạng chiến tranh ở biên giới Tây Nam.", "Đưa đất nước tiếp tục đi theo con đường xã hội chủ nghĩa."], a: 3},
+        {q: "Câu 51. Những thay đổi nào trên thế giới đã tác động mạnh đến Việt Nam trong giai đoạn đầu đổi mới?", o: ["Cuộc gặp gỡ thương lượng giữa hai nước Mĩ -Trung.", "Xu thế cải cách, mở cửa và hội nhập quốc tế.", "Các cuộc xung đột tại khu vực Trung Đông.", "Sự phát triển mạnh mẽ của các nước Đông Âu."], a: 1},
+        {q: "Câu 52. Thắng lợi của chiến dịch nào sau đây là mốc đánh dấu kết thúc cuộc kháng chiến chống Mỹ, cứu nước của nhân dân Việt Nam?", o: ["Chiến dịch Hồ Chí Minh.", "Chiến dịch Tây Nguyên.", "Chiến dịch Huế - Đà Nẵng.", "Chiến dịch Đường 14 – Phước Long."], a: 0},
+        {q: "Câu 53. Từ sau Chiến tranh lạnh, hầu hết các quốc gia điều chỉnh chiến lược phát triển lấy kinh tế làm trọng điểm vì một trong những lí do nào sau đây?", o: ["Kinh tế trở thành nội dung căn bản trong quan hệ quốc tế.", "Sức mạnh của một quốc gia chỉ dựa trên sức mạnh về kinh tế.", "Các cường quốc đã chấm dứt hoàn toàn chạy đua vũ trang.", "Hòa bình và an ninh thế giới được bảo vệ ở mức cao nhất."], a: 0},
+        {q: "Câu 54. Một trong những nguyên nhân quyết định dẫn đến thắng lợi của cuộc kháng chiến chống Mỹ, cứu nước (1954 - 1975) của nhân dân Việt Nam là", o: ["tinh thần đoàn kết, phối hợp chiến đấu của các dân tộc ở Đông Nam Á.", "sự giúp đỡ của các nước xã hội chủ nghĩa: Trung Quốc, Liên Xô, Cam-pu-chia.", "truyền thống yêu nước, đoàn kết của nhân dân hai miền Nam – Bắc.", "sự ủng hộ của nhân dân Mỹ chống lại cuộc chiến tranh xâm lược của Mỹ ở Việt Nam."], a: 2},
+        {q: "Câu 55. Cách mạng tháng Tám năm 1945 ở Việt Nam diễn ra theo hình thái nào sau đây", o: ["Tổng công kích giành chính quyền.", "Bãi công giành chính quyền.", "Tổng khởi nghĩa giành chính quyền.", "Chiến tranh cách mạng."], a: 2},
+        {q: "Câu 56. Năm 1945, quyết định của Hội nghị nào sau đây góp phần tạo ra khuôn khổ của trật tự thế giới mới sau Chiến tranh thế giới thứ hai?", o: ["Hội nghị Ba li.", "Hội nghị I-an-ta.", "Hội nghị Pa-ri.", "Hội nghị Giơ-ne-vơ."], a: 1},
+        {q: "Câu 57. Các cuộc đấu tranh bảo vệ Tổ quốc từ năm 1945 để lại bài học kinh nghiệm nào sau đây cho công cuộc bảo vệ Tổ quốc Việt Nam xã hội chủ nghĩa?", o: ["Phát huy yếu tố ngoại lực làm nhân tố quyết định sức mạnh bảo vệ Tổ quốc.", "Kết hợp sức mạnh dân tộc và sức mạnh thời đại, kết hợp xây dựng và bảo vệ.", "Luôn đẩy mạnh các hoạt động ngoại giao để mở đường cho đấu tranh quân sự.", "Tăng cường sức mạnh quân sự là biện pháp duy nhất có thể bảo vệ Tổ quốc."], a: 1},
+        {q: "Câu 58. Trong giai đoạn 1975-1985, Việt Nam chủ trương thực hiện hoạt động đối ngoại nào sau đây đối với Liên Xô và các nước xã hội chủ nghĩa?", o: ["Tăng cường quan hệ hợp tác.", "Trực tiếp đối đầu quân sự.", "Can thiệp nội bộ các nước.", "Tiến hành chống phá, cô lập."], a: 0},
+        {q: "Câu 59. Tiến trình khởi nghĩa giành chính quyền ở Việt Nam trong Cách mạng tháng Tám năm 1945 là", o: ["giành chính quyền bộ phận tiến lên giành chính quyền trên toàn quốc.", "giành chính quyền đồng thời ở cả hai địa bàn – nông thôn và rừng núi.", "giành chính quyền ở nông thôn thắng lợi, sau đó tiến về bao vây đô thị.", "giành chính quyền ở các đô thị rồi toà về bao vây nông thôn và miền núi"], a: 0},
+        {q: "Câu 60. Cuộc đấu tranh bảo vệ Tổ quốc của nhân dân Việt Nam (từ sau tháng 4-1975 đến cuối những năm 80 của thế kỉ XX) có ý nghĩa nào sau đây?", o: ["Góp phần bảo vệ hoà bình, ổn định ở khu vực và thế giới.", "Góp phần vào việc thiết lập một trật tự thế giới mới.", "Góp phần vào quá trình giải trừ chủ nghĩa thực dân ở châu Á.", "Chấm dứt được âm mưu chống phá của các thế lực thù địch."], a: 0},
+        {q: "Câu 61. Nội dung nào sau đây của đường lối đổi mới ở Việt Nam (12-1986) phù hợp với sự phát triển của xu thế thế giới cuối thế kỉ XX - đầu thế kỉ XXI?", o: ["Xây dựng kinh tế kế hoạch hóa tập trung theo định hướng mới.", "Đảm bảo sự lãnh đạo của nhà nước pháp quyền xã hội chủ nghĩa.", "Tăng cường quan hệ kinh tế đối ngoại với các nước thuộc địa.", "Lấy đổi mới kinh tế làm trọng tâm để xây dựng thực lực quốc gia."], a: 3},
+        {q: "Câu 62. Nội dung cơ bản của đường lối đổi mới về kinh tế của Đảng Cộng sản Việt Nam giai đoạn 1996-2006 là", o: ["công nghiệp hoá, ưu tiên phát triển công nghiệp nặng.", "đây mạnh công nghiệp hoá và hiện đại hoá đất nước.", "bước đầu xoá bỏ cơ chế quản lí quan liêu và bao cấp.", "xây dựng nền kinh tế kế hoạch hoá, tập trung, bao cấp."], a: 1},
+        {q: "Câu 63. Sau Cách mạng tháng Tám năm 1945, quân đội quốc gia nào sau đây vào phía bắc vĩ tuyến 16 của Việt Nam để giải giáp vũ khí quân đội Nhật Bản?", o: ["Tây Ban Nha.", "Anh.", "Mỹ.", "Trung Hoa Dân quốc."], a: 3},
+        {q: "Câu 64. Nhận xét nào sau đây là đúng về công cuộc Đổi mới ở Việt Nam?", o: ["Đổi mới hệ thống chính trị là trọng tâm, là ưu tiên số một.", "Đổi mới nhưng không thay đổi mục tiêu xã hội chủ nghĩa.", "Đổi mới phải gần với xây dựng nền kinh tế kế hoạch hoá.", "Đổi mới phải gắn với chiến lược ưu tiên công nghiệp nặng."], a: 1},
+        {q: "Câu 65. Năm 1988, quân đội Việt Nam đã có hoạt động nào sau đây để bảo vệ chủ quyền của Tổ quốc?", o: ["Chiến đấu chống lại cuộc tấn công của Trung Quốc ở đảo Gạc Ma.", "Tổ chức cuộc đấu tranh bảo vệ biên giới ở 6 tỉnh miền núi phía Bắc.", "Mở đầu cuộc đấu tranh bảo vệ Tổ quốc ở biên giới phía Tây Nam, đánh đuổi quân Pôn Pốt.", "Phản đối Trung Quốc đưa dân khoan Hải Dương – 981 đến vùng biển Việt Nam."], a: 0},
+        {q: "Câu 66. Nội dung nào sau đây là đúng về nội dung đổi mới chính trị của Việt Nam (từ năm 1986)?", o: ["Tăng cường chế độ chuyên chính vô sản.", "Xây dựng nền dân chủ xã hội chủ nghĩa.", "Tăng cường thành phần kinh tế tư nhân.", "Các vấn đề an sinh xã hội được cải thiện."], a: 1},
+        {q: "Câu 67. Trong đường lối đổi mới đất nước (từ năm 1986), Đảng Cộng sản Việt Nam có chủ trương nào sau đây?", o: ["Phát triển kinh tế kế hoạch hóa tập trung.", "Xây dựng nền dân chủ xã hội chủ nghĩa.", "Xóa bỏ sự tồn tại của kinh tế thị trường.", "Duy trì cơ chế quản lí quan liêu, bao cấp."], a: 1},
+        {q: "Câu 68. Năm 2015, các nhà lãnh đạo của Hiệp hội các quốc gia Đông Nam Á họp tại Ma-lai-xi-a tuyên bố thành lập", o: ["Diễn đàn hợp tác Á – Âu.", "Cộng đồng ASEAN.", "Liên minh châu Âu.", "Tổ chức thương mại thế giới."], a: 1},
+        {q: "Câu 69. Một trong những nội dung của đường lối đổi mới đất nước (từ năm 2006 đến nay) là", o: ["chủ động, tích cực hội nhập kinh tế quốc tế toàn diện và sâu rộng.", "ngoại giao phá vây và nỗ lực bước đầu hội nhập kinh tế quốc tế.", "đẩy mạnh công nghiệp hoá, ưu tiên phát triển công nghiệp nặng.", "đổi mới kinh tế phải đi sau đổi mới chính trị để tránh gây bất ổn."], a: 0},
+        {q: "Câu 70. Sự kiện nào sau đây ghi nhận Trật tự thế giới hai cực I-an-ta chính thức sụp đổ?", o: ["Chủ nghĩa xã hội ở Liên Xô bị khủng hoảng và sụp đổ năm 1991.", "Liên Xô và Mỹ kí Hiệp ước hạn chế vũ khí chiến lược (SALT 1).", "Cuộc gặp giữa hai nhà lãnh đạo Liên Xô và Mỹ ở đào Man-ta (1989).", "Sự vươn lên của các nền kinh tế Nhật Bản, Trung Quốc và châu Âu."], a: 0},
+        {q: "Câu 71. Nội dung nào sau đây là nguyên nhân căn bản của việc Đảng Cộng sản Việt Nam tiến hành đổi mới đất nước?", o: ["Đây là chu kì hoạt động thường xuyên, liên tục của sự phát triển.", "Để theo kịp sự phát triển của cuộc cách mạng khoa học – kĩ thuật.", "Để tiếp tục thúc đẩy những thành tựu của quá trình hiện đại hoá.", "Đổi mới để đáp ứng các yêu cầu gia nhập tổ chức Liên hợp quốc."], a: 1},
+        {q: "Câu 72. Nội dung nào sau đây là thành tựu cơ bản của đổi mới văn hóa ở Việt Nam từ năm 1986 đến nay?", o: ["Trở thành nước phát triển có thu nhập cao.", "Đạt chuẩn phổ cập giáo dục trung học cơ sở.", "Bình thường hóa quan hệ ngoại giao với Mỹ.", "Thực hiện thành công công nghiệp hoá."], a: 1},
+        {q: "Câu 73. Lực lượng nào sau đây đóng vai trò quyết định đến thắng lợi của Cách mạng tháng Tám (1945)?", o: ["Vũ trang", "Chính trị", "Tri thức.", "Nông dân"], a: 1},
+        {q: "Câu 74. Hiệp hội các quốc gia Đông Nam Á ra đời trong bối cảnh nào sau đây?", o: ["Cuộc chiến tranh lạnh có ảnh hưởng đến nhiều nước.", "Cuộc chiến tranh xâm lược Việt Nam của Mỹ đã kết thúc.", "Trật tự thế giới đa cực, nhiều trung tâm đã được thiết lập.", "Trật tự hai cực I-an-ta đã sụp đổ hoàn toàn."], a: 0},
+        {q: "Câu 75. Nội dung nào dưới đây phản ánh đúng nguyên nhân khách quan thúc đẩy Đảng và Nhà nước Việt Nam tiến hành công cuộc đổi mới đất nước (12-1986)?", o: ["Sự ủng hộ từ phong trào cách mạng thế giới.", "Các nước Đông Âu đều đã tiến hành đổi mới.", "Cuộc khủng hoảng rất trầm trọng của Liên Xô.", "Cải tổ ở Liên Xô đã đạt được nhiều thành tựu."], a: 2},
+        {q: "Câu 76. Chương trình kinh tế nào được đưa lên hàng đầu trong kế hoạch Nhà nước 5 năm ở Việt Nam (1986 - 1990)?", o: ["Hàng xuất khẩu.", "Hàng tiêu dùng.", "Công nghiệp nặng.", "Lương thực - thực phẩm."], a: 3},
+        {q: "Câu 77. Trong những năm 1986 - 1990, về lương thực - thực phẩm, Việt Nam đạt được thành tựu nào?", o: ["Đã có dự trữ và xuất khẩu gạo.", "Xuất khấu gạo đứng đầu thế giới.", "Vốn đầu tư của nước ngoài tăng nhanh.", "Cả nước không còn hiện tượng dân đói."], a: 0},
+        {q: "Câu 78. Trong giai đoạn đầu của thời kỳ đổi mới (1986 - 1990), Đảng Cộng sản Việt Nam chủ trương thực hiện Ba chương trình kinh tế lớn là do", o: ["Giải quyết các nhu cầu thiết yếu cho nhân dân.", "Để đáp ứng nhu cầu nhiều xuất khẩu hàng hóa.", "Giải quyết nhu cầu việc làm cho người lao động.", "Tận dụng các lợi thế nguồn lao động trẻ, giá rẻ."], a: 0},
+        {q: "Câu 79. Đối tượng nào sau đây trở thành kẻ thù chính và trực tiếp của nhân dân Việt Nam kể từ sau thắng lợi Cách mạng tháng Tám năm 1945?", o: ["Quân Trung Hoa Dân quốc.", "Quân phiệt Nhật Bản.", "Thực dân Pháp.", "Liên quân Anh - Ấn."], a: 2},
+        {q: "Câu 80. Đối với quốc tế, thắng lợi của cuộc kháng chiến chống thực dân Pháp (1945-1954) của nhân dân Việt Nam có ý nghĩa lịch sử nào sau đây?", o: ["Đánh dấu sự sụp đổ của chế độ phong kiến Việt Nam.", "Cổ vũ phong trào giải phóng dân tộc ở các nước thuộc địa.", "Mở ra kỉ nguyên hòa bình, thống nhất và đi lên chủ nghĩa xã hội.", "Hoàn thành cuộc cách mạng giải phóng dân tộc trong cả nước."], a: 1},
+        {q: "Câu 81. Nội dung nào sau đây là thách thức của Cộng đồng ASEAN sau năm 2015?", o: ["Tình trạng ô nhiễm môi trường gia tăng.", "Sự tương đồng về văn hóa.", "Một số nước chưa giành được độc lập.", "Chưa có sự hợp tác nội khối."], a: 0},
+        {q: "Câu 82. Nội dung nào sau đây là bối cảnh lịch sử thành lập Hiệp hội các quốc gia Đông Nam Á (ASEAN)?", o: ["Xu thế khu vực hoá đã xuất hiện và ngày càng phát triển mạnh mẽ.", "Nhiều nước Đông Nam Á đã vươn lên trở thành \"con rồng\" kinh tế.", "Xu thế toàn cầu hoá đã xuất hiện và ngày càng phát triển mạnh mẽ.", "Liên Xô và các nước đã tuyên bố chấm dứt cuộc Chiến tranh lạnh."], a: 0},
+        {q: "Câu 84. Việt Nam gia nhập ASEAN (1995) đã mở ra nhiều cơ hội lớn cho công cuộc xây dựng và phát triển đất nước, ngoại trừ việc", o: ["hội nhập, tiếp thu những thành tựu khoa học – kĩ thuật từ bên ngoài.", "thu hút nguồn vốn đầu tư của nước ngoài để phát triển kinh tế.", "nền kinh tế bị cạnh tranh khốc liệt, bản sắc văn hoá dân tộc có nguy cơ xói mòn.", "mở rộng, trao đổi và giao lưu văn hoá với bên ngoài."], a: 2},
+        {q: "Câu 85. Một trong những nguyên tắc hoạt động cơ bản được xác định trong Điều 2 của Hiến chương Liên hợp quốc (1945) là", o: ["hợp tác phát triển về kinh tế, văn hóa và giáo dục.", "chung sống hòa bình để vừa hợp tác vừa đấu tranh.", "giải quyết tranh chấp quốc tế bằng biện pháp hòa bình.", "tiến hành hợp tác quốc tế giữa những nước thành viên."], a: 2},
+        {q: "Câu 86. Đường lối kháng chiến của cuộc kháng chiến toàn quốc chống thực dân Pháp là", o: ["tranh thủ sự ủng hộ của nhân loại tiến bộ.", "trường kì kháng chiến nhất định thắng lợi.", "tự lực, toàn dân, toàn diện, lâu dài, từng bước tranh thủ sự ủng hộ của cộng đồng quốc tế.", "toàn dân, toàn diện, trường kì, tự lực cánh sinh và tranh thủ sự ủng hộ của quốc tế."], a: 3},
+        {q: "Câu 87. Nội dung nào sau đây phản ánh đúng nhân tố hàng đầu làm nên thắng lợi của cuộc kháng chiến chống Mỹ, cứu nước (1954 - 1975) của nhân dân Việt Nam?", o: ["Đường lối lãnh đạo sáng tạo của Đảng Lao động Việt Nam.", "Liên minh chiến đấu của nhân dân ba nước Đông Dương.", "Liên Xô và Trung Quốc đoàn kết, nhất trí ủng hộ, giúp đỡ.", "Cách mạng miền Nam phát huy được vai trò quyết định nhất."], a: 0},
+        {q: "Câu 88. Một trong những quyết định quan trọng của Hội nghị I-an-ta (2-1945) là nhanh chóng", o: ["viện trợ cho Liên Xô phục hồi kinh tế.", "tiêu diệt tận gốc chủ nghĩa phát xít.", "thu hẹp ảnh hưởng của Mỹ ở châu Á.", "khôi phục nền kinh tế các nước Tây Âu."], a: 1},
+        {q: "Câu 89. Trọng tâm của công cuộc Đổi mới ở Việt Nam (từ năm 1986) là tập trung vào lĩnh vực", o: ["chính trị.", "văn hoá.", "kinh tế.", "tư tưởng."], a: 2},
+        {q: "Câu 90. Trong giai đoạn 1975-1985, Việt Nam chủ trương thực hiện hoạt động đối ngoại nào sau đây đối với Mỹ?", o: ["Thiết lập quan hệ đối tác chiến lược toàn diện.", "Đàm phán và đi đến kí kết Hiệp định Pari.", "Đẩy mạnh hợp tác trên tất cả các lĩnh vực.", "Bước đầu đàm phán bình thường hóa quan hệ."], a: 3},
+        {q: "Câu 91. Nội dung cơ bản của đường lối đổi mới về kinh tế của Đảng Cộng sản Việt Nam giai đoạn 1996-2006 là", o: ["công nghiệp hoá, ưu tiên phát triển công nghiệp nặng.", "đây mạnh công nghiệp hoá và hiện đại hoá đất nước.", "bước đầu xoá bỏ cơ chế quản lí quan liêu và bao cấp.", "xây dựng nền kinh tế kế hoạch hoá, tập trung, bao cấp."], a: 1},
+        {q: "Câu 92. Một trong những điểm giống nhau của công cuộc cải cách - mở cửa ở Trung Quốc (1978) với công cuộc Đổi mới ở Việt Nam (1986) là", o: ["chú trọng đổi mới về chính trị.", "lấy đổi mới kinh tế là trọng tâm.", "cải cách toàn diện trên lĩnh vực.", "kinh tế kế hoạch hóa tập trung."], a: 1},
+        {q: "Câu 93. Năm 1954, quân dân Việt Nam giành thắng lợi trong chiến dịch", o: ["Đường 14 – Phước Long.", "Hồ Chí Minh.", "Huế - Đà Nẵng.", "Điện Biên Phủ."], a: 3},
+        {q: "Câu 94. Quốc gia nào sau đây ở Đông Nam Á đi theo con đường xã hội chủ nghĩa?", o: ["Nhật Bản.", "Thái Lan.", "Việt Nam.", "Hàn Quốc."], a: 2},
+        {q: "Câu 95. Sự kiện nào sau đây đánh dấu bước ngoặt của ASEAN trong giai đoạn 1967-1976?", o: ["Hiệp ước Ba-li được kí kết.", "Hiến chương ASEAN được thông qua.", "Ban Thư kí ASEAN được thành lập.", "Cộng đồng ASEAN được xây dựng."], a: 0},
+        {q: "Câu 96. Trong công cước Đổi mới, để gây dựng nguồn nhân lực chất lượng cao, Việt Nam đã coi lĩnh vực nào sau đây là quốc sách hàng đầu", o: ["An ninh.", "Giáo dục.", "Xã hội.", "Kinh tế."], a: 1},
+        {q: "Câu 97. Những quốc gia nào sau đây được đánh giá là quốc gia mới nổi, có sức mạnh tổng hợp vượt trội, đang vươn lên khẳng định vị thế và ảnh hưởng sau Chiến tranh lạnh?", o: ["Ấn Độ và Mỹ.", "Mỹ và Nga.", "Trung Quốc và Nhật Bản.", "Đức và Mỹ."], a: 2},
+        {q: "Câu 98. Đại hội đại biểu lần thứ VI (1986) của Đảng Cộng sản Việt Nam đã", o: ["đưa đất nước thoát khỏi khủng hoảng kinh tế.", "đề ra đường lối đổi mới toàn diện đất nước.", "đề ra bản Hiếp pháp của nước Việt Nam mới.", "mở đầu thời kỳ quá độ lên chủ nghĩa xã hội."], a: 1},
+        {q: "Câu 99. Sau khi Chiến tranh lạnh kết thúc, thế giới phát triển theo xu thế", o: ["đơn cực.", "hai cực.", "ba cực.", "đa cực."], a: 3},
+        {q: "Câu 100. Những thay đổi nào trên thế giới đã tác động mạnh đến Việt Nam trong giai đoạn đầu đổi mới?", o: ["Cuộc gặp gỡ thương lượng giữa hai nước Mĩ -Trung.", "Xu thế cải cách, mở cửa và hội nhập quốc tế.", "Các cuộc xung đột tại khu vực Trung Đông.", "Sự phát triển mạnh mẽ của các nước Đông Âu."], a: 1},
+        {q: "Câu 101. Từ trong phong trào Đồng khởi ở miền Nam Việt Nam, tổ chức đoàn thể chính trị nào sau đây đã ra đời?", o: ["Liên minh Nhân dân Việt – Miên – Lào.", "Việt Nam Độc lập Đồng minh (Việt Minh).", "Mặt trận thống nhất dân tộc phản đế Đông Dương.", "Mặt trận Dân tộc Giải phóng miền Nam Việt Nam."], a: 3},
+        {q: "Câu 102. Quân dân Việt Nam đã giành quyền chủ động trên chiến trường chính Bắc Bộ sau thắng lợi của chiến dịch nào sau đây?", o: ["Tây Bắc (1951).", "Biên Giới (1950).", "Việt Bắc (1947).", "Hòa Bình (1951)"], a: 1},
+        {q: "Câu 103. Một trong những nguyên tắc hàng đầu đặt ra cho công cuộc Đổi mới đất nước từ năm 1986 đến nay là", o: ["gia nhập các tổ chức liên kết kinh tế quốc tế.", "kiên trì mục tiêu cách mạng xã hội chủ nghĩa.", "Tiến hành tập thể hóa nông nghiệp, công nghiệp.", "xóa bỏ hố sâu phân cách giàu nghèo trên cả nước."], a: 1},
+        {q: "Câu 104. Kết quả lớn nhất của công cuộc Đổi mới đất nước trong giai đoạn từ năm 1986 đến đến 1996 là", o: ["đưa đất nước thoát khỏi khủng hoảng kinh tế, xã hội.", "đưa Việt Nam trở thành cường quốc số 1 của châu Á.", "hoàn thiện cơ chế quản lý đất nước xã hội chủ nghĩa.", "đã thực hiện đẩy mạnh công nghiệp hóa, hiện đại hóa."], a: 0},
+        {q: "Câu 105. Thành tựu đạt được bước đầu trong giai đoạn từ năm 1986 - 1996 của công cuộc đổi mới đất nước chứng tỏ điều gì?", o: ["Đã phát huy được sức mạnh của một dân tộc.", "Phương thức hoạt động của Đảng có sự đổi mới.", "Quan hệ đối ngoại của Việt Nam được mở rộng.", "Đường lối đổi mới của Đảng là đúng, phù hợp."], a: 3},
+        {q: "Câu 106. Lãnh đạo công cuộc đổi mới ở Việt Nam (từ năm 1986 đến nay) là", o: ["Đảng cộng sản Đông Dương.", "Đảng cộng sản Việt Nam.", "Đảng Lao động Việt Nam.", "Mặt trận Liên Việt."], a: 1},
+        {q: "Câu 107. Sự ra đời của tổ chức Hiệp ước Bắc Đại Tây Dương (1949) và tổ chức Hiệp ước Vácsava (1955) đã tác động như thế nào đến quan hệ quốc tế?", o: ["Đánh dấu cuộc Chiến tranh lạnh chính thức bắt đầu.", "Tạo nên sự phân chia đối lập giữa Đông Âu và Tây Âu.", "Xác lập cục diện hai cực, hai phe, Chiến tranh lạnh bao trùm thế giới.", "Đặt nhân loại đứng trước nguy cơ của cuộc chiến tranh thế giới mới."], a: 2},
+        {q: "Câu 108. Một trong những nội dung hoạt động đối ngoại của Việt Nam từ năm 1986 đến nay là", o: ["mở rộng và đa dạng hóa quan hệ quốc tế.", "thiết lập quan hệ với các nước Đông Âu.", "thiết lập quan hệ với các nước xã hội chủ nghĩa.", "hoàn thành thống nhất đất nước về mặt nhà nước."], a: 0},
+        {q: "Câu 109. Cuộc kháng chiến chống Mỹ, cứu nước (1954 – 1975) của nhân dân Việt Nam kết thúc thắng lợi đã", o: ["đánh dấu sự sụp đổ hoàn toàn của chủ nghĩa thực dân mới.", "mở đầu quá trình sụp đổ của chủ nghĩa thực dân trên thế giới.", "cổ vũ phong trào vũ trang đấu tranh giành độc lập ở Đông Nam Á.", "thúc đẩy sự phát triển của phong trào đấu tranh vì hoà bình, dân chủ."], a: 0},
+        {q: "Câu 110. Nội dung nào sau đây là đúng về đường lối đổi mới trong hoạt động đối ngoại của Đảng Cộng sản Việt Nam (từ năm 1986 đến năm 1995)?", o: ["Coi trọng đa phương hoá, đa dạng hoá quan hệ đối ngoại.", "Tập trung vào giải quyết quan hệ với Liên Xô, Trung Quốc.", "Coi quan hệ với Liên Xô là “hòn đá tảng\" trong đối ngoại.", "Chỉ phát triển quan hệ với Nga và nhóm các nước Á - Âu"], a: 0},
+        {q: "Câu 111. Dưới tác động của công cuộc Đổi mới, nền kinh tế Việt Nam vận hành theo định hướng", o: ["thị trường.", "quan liêu.", "bao cấp.", "tư doanh."], a: 0},
 
-    // --- BIẾN TOÀN CỤC ---
-    let currentMode = ''; 
-    let currentQuestions = [];
-    let currentIndex = 0;
-    let score = 0; 
-    let userAnswers = []; 
-    let isPracticeAttempted = false; 
+        // --- PHẦN 2: BÀI TẬP ĐÚNG SAI (Đã chuyển đổi thành từng câu hỏi nhỏ) ---
+        // Mỗi câu có 2 lựa chọn: Đúng / Sai. 50/50 sẽ bị vô hiệu hóa với dạng câu này.
+        {q: "<b>Bài tập Đúng/Sai - Câu 1, ý a:</b><br>Phong trào Đồng khởi đã mở ra bước phát triển mới của cách mạng miền Nam, làm sụp đổ chính quyền tay sai Ngô Đình Diệm.", o: ["Sai", "Đúng"], a: 0},
+        {q: "<b>Bài tập Đúng/Sai - Câu 1, ý b:</b><br>Thắng lợi của phong trào Đồng khởi năm 1960 đã chứng tỏ được bản lĩnh, tinh thần đấu tranh anh dũng của quân và dân miền Nam Việt Nam trước sự gia tăng đàn áp từ kẻ thù.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 1, ý c:</b><br>Đoạn tư liệu trên đề cập đến phong trào Đồng khởi ở miền Nam Việt Nam trong những năm 1959-1960.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 1, ý d:</b><br>Phong trào Đồng khởi của quân dân miền Nam thắng lợi là kết quả đấu tranh của lực lượng chính trị kết hợp với lực lượng vũ trang là chủ yếu.", o: ["Sai", "Đúng"], a: 0},
 
-    // --- KHỞI TẠO ---
-    window.onload = () => {
-        const select = document.getElementById('lesson-select');
-        for (let key in database) {
-            let option = document.createElement('option');
-            option.value = key;
-            option.text = database[key].title;
-            select.appendChild(option);
-        }
-    };
+        {q: "<b>Bài tập Đúng/Sai - Câu 2, ý a:</b><br>Cuộc Tổng tiến công và nổi dậy vào dịp Tết Mậu Thân 1968 đã đánh dấu bước ngoặt của cuộc kháng chiến chống Mỹ, cứu nước.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 2, ý b:</b><br>Quá trình đàm phán giữa Việt Nam và Mỹ kéo dài nhiều năm là do sự tác động của xu thế hoà hoãn Đông – Tây chưa có hồi kết.", o: ["Sai", "Đúng"], a: 0},
+        {q: "<b>Bài tập Đúng/Sai - Câu 2, ý c:</b><br>Thắng lợi quân sự của quân dân hai miền Nam – Bắc Việt Nam đã tác động trực tiếp đến việc Mỹ phải đến bàn đàm phán và kí Hiệp định Pa-ri.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 2, ý d:</b><br>Từ thực tiễn Hội nghị Pa-ri (1968 - 1973) cho thấy, Việt Nam muốn giành thắng lợi trên mặt trận ngoại giao phải có thắng lợi quân sự quyết định.", o: ["Sai", "Đúng"], a: 1},
 
-    // --- TÍNH NĂNG GIAO DIỆN (DARK MODE & ZOOM) ---
+        {q: "<b>Bài tập Đúng/Sai - Câu 3, ý a:</b><br>Chiến thắng Điện Biên Phủ (1954) tạo cơ sở căn bản và quyết định đi đến ký kết Hiệp định Giơ-ne-vơ về kết thúc chiến tranh, lập lại hòa bình ở Đông Dương.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 3, ý b:</b><br>Đoạn tư liệu trên đề cập đến bước phát triển của cuộc kháng chiến chống thực dân Pháp (1945-1954) qua những thắng lợi về quân sự.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 3, ý c:</b><br>Chiến thắng Biên giới (1950) đã giáng một đòn quyết định vào chiến lược đánh nhanh thắng nhanh của Pháp, buộc chúng phải chuyển sang đánh lâu dài với ta.", o: ["Sai", "Đúng"], a: 0},
+        {q: "<b>Bài tập Đúng/Sai - Câu 3, ý d:</b><br>Chiến thắng Điện Biên Phủ đã tiêu diệt hoàn toàn quân địch, kết thúc cuộc kháng chiến chống thực dân Pháp.", o: ["Sai", "Đúng"], a: 0},
+
+        {q: "<b>Bài tập Đúng/Sai - Câu 4, ý a:</b><br>Đảng Lao động Việt Nam đã họp và quyết định thực hiện kế hoạch giải phóng hoàn toàn miền Nam trong hai năm (1974-1975).", o: ["Sai", "Đúng"], a: 0},
+        {q: "<b>Bài tập Đúng/Sai - Câu 4, ý b:</b><br>Sau khi chiến dịch Đường 14 – Phước Long thắng lợi (6-1-1975), thời cơ tiến công chiến lược cho giải phóng hoàn toàn miền Nam đã tới.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 4, ý c:</b><br>Cuộc Tổng tiến công và nổi dậy Xuân 1975 diễn ra mau lẹ, có sự kết hợp của lực lượng vũ trang làm nòng cốt và lực lượng chính trị ở các địa phương", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 4, ý d:</b><br>Chiến dịch Hồ Chí Minh kết thúc thắng lợi đã hoàn thành sự nghiệp kháng chiến chống Mỹ, cứu nước; đồng thời mở ra kỉ nguyên mới cho cả dân tộc.", o: ["Sai", "Đúng"], a: 1},
+
+        {q: "<b>Bài tập Đúng/Sai - Câu 5, ý a:</b><br>Nền kinh tế kinh tế thị trường định hướng xã hội chủ nghĩa ở Việt Nam không có điểm khác với nền kinh tế thị trường ở các nước phương Tây.", o: ["Sai", "Đúng"], a: 0},
+        {q: "<b>Bài tập Đúng/Sai - Câu 5, ý b:</b><br>Đoạn tư liệu trên khẳng định kinh tế Việt Nam hiện nay là nền kinh tế thị trường theo định hướng xã hội chủ nghĩa.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 5, ý c:</b><br>Việc chuyển đổi mô hình quản lý kinh tế sang cơ chế thị trường định hướng xã hội chủ nghĩa đã tạo động lực to lớn để Việt Nam thực hiện các mục tiêu của chủ nghĩa xã hội.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 5, ý d:</b><br>Việc xây dựng nền kinh tế thị trường định hướng xã hội chủ nghĩa chứng tỏ công cuộc đổi mới ở nước ta đã hoàn thành thắng lợi.", o: ["Sai", "Đúng"], a: 0},
+
+        {q: "<b>Bài tập Đúng/Sai - Câu 6, ý a:</b><br>Hội nghị lần thứ 15 xác định kẻ thù của nhân dân miền Nam lúc này là đế quốc Mĩ và tập đoàn tay sai Nguyễn Văn Thiệu.", o: ["Sai", "Đúng"], a: 0},
+        {q: "<b>Bài tập Đúng/Sai - Câu 6, ý b:</b><br>Con đường phát triển cơ bản của cách mạng ở miền Nam là khởi nghĩa giành chính quyền về tay nhân dân. Đó là con đường lấy sức mạnh của quần chúng, dựa vào lực lượng chính trị của quần chúng là chủ yếu kết hợp với lực lượng vũ trang để đánh đổ ách thống trị của đế quốc và phong kiến, thiết lập chính quyền cách mạng của nhân dân.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 6, ý c:</b><br>Nghị quyết 15, đánh dấu bước trưởng thành của Đảng, thể hiện sâu sắc tinh thần độc lập tự chủ, năng động sáng tạo trong đánh giá so sánh lực lượng giữa ta và địch, trong vận đụng lý luận Mác - Lênin vào cách mạng miền Nam.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 6, ý d:</b><br>Nghị quyết 15 dã mở đường cho cách mạng miền Nam tiến lên, làm xoay chuyển tình thế và là tiền đề quan trọng dẫn đến thắng lợi hoàn toàn của nhân dân ta trong cuộc kháng chiến chống Mỹ, cứu nước.", o: ["Sai", "Đúng"], a: 1},
+
+        {q: "<b>Bài tập Đúng/Sai - Câu 7, ý a:</b><br>Các nước Đồng minh đã bắt đầu thiết lập quan hệ ngoại giao với Việt Nam ngay sau khi nước Việt Nam Dân chủ Cộng hoà ra đời.", o: ["Sai", "Đúng"], a: 0},
+        {q: "<b>Bài tập Đúng/Sai - Câu 7, ý b:</b><br>Hiệp định Sơ bộ (1946) đã chuyển mối quan hệ Việt - Pháp từ đối đầu sang đối thoại.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 7, ý c:</b><br>Đoạn tư liệu đề cập đến các hoạt động ngoại giao của Chính phủ Việt Nam Dân chủ Cộng hòa trong cuộc kháng chiến chống Pháp (1945-1954).", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 7, ý d:</b><br>Hoạt động ngoại giao của Chính phủ Việt Nam Dân Chủ Cộng hòa trong những năm 1946-1954 đã góp phần buộc thực dân Pháp phải công nhận các quyền dân tộc cơ bản của ba nước Đông Dương.", o: ["Sai", "Đúng"], a: 1},
+
+        {q: "<b>Bài tập Đúng/Sai - Câu 8, ý a:</b><br>Sau Hiệp định Giơ-ne-vơ năm 1954 về Đông Dương, Pháp dựng lên chính quyền tay sai Ngô Đình Diệm cốt là để trì hoãn việc thống nhất đất nước ở Việt Nam.", o: ["Sai", "Đúng"], a: 0},
+        {q: "<b>Bài tập Đúng/Sai - Câu 8, ý b:</b><br>Từ thực tiễn đất nước và sự phá hoại của Mỹ và chính quyền Ngô Đình Diệm, nếu chỉ sử dụng hình thức đấu tranh hoà bình sẽ không thể thống nhất Tổ quốc.", o: ["Sai", "Đúng"], a: 1},
+        {q: "<b>Bài tập Đúng/Sai - Câu 8, ý c:</b><br>Đặc điểm lớn nhất và độc đáo nhất của cách mạng Việt Nam (1954 - 1975) là một đảng thống nhất lãnh đạo cả nước thực hiện đồng thời 5 nhiệm vụ chiến lược.", o: ["Sai", "Đúng"], a: 0},
+        {q: "<b>Bài tập Đúng/Sai - Câu 8, ý d:</b><br>Chiến dịch Hồ Chí Minh kết thúc thắng lợi đã hoàn thành sự nghiệp kháng chiến chống Mỹ, cứu nước; đồng thời mở ra kì nguyên mới cho các dân tộc.", o: ["Sai", "Đúng"], a: 1}
+    ];
+
+    // --- LOGIC ỨNG DỤNG ---
+    let currentMode = '';
+    let score = 0;
+    let index = 0;
+    let userAns = [];
+    let isUsed5050 = false; 
+
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
-        const icon = document.getElementById('icon-mode');
-        if (document.body.classList.contains('dark-mode')) {
-            icon.innerText = "☀️"; // Chuyển thành icon mặt trời
-        } else {
-            icon.innerText = "🌙"; // Chuyển thành icon mặt trăng
-        }
     }
 
     function changeFontSize(val) {
-        document.getElementById('main-box').style.fontSize = val + "px";
-        // Tự động điều chỉnh chiều rộng box khi font to lên để không bị chật
-        if (val > 18) {
-            document.getElementById('main-box').style.maxWidth = "900px";
-        } else {
-            document.getElementById('main-box').style.maxWidth = "700px";
-        }
+        document.getElementById('main-box').style.fontSize = val + 'px';
     }
 
-    // --- LOGIC TRẮC NGHIỆM ---
     function startQuiz(mode) {
         currentMode = mode;
-        const lessonKey = document.getElementById('lesson-select').value;
-        currentQuestions = database[lessonKey].questions; 
-        
-        currentIndex = 0;
         score = 0;
-        userAnswers = [];
-        
+        index = 0;
+        userAns = [];
         document.getElementById('setup-screen').style.display = 'none';
         document.getElementById('quiz-screen').style.display = 'block';
-        document.getElementById('mode-display').innerText = mode === 'practice' ? "Luyện Tập" : "Kiểm Tra";
-        document.getElementById('total-q').innerText = currentQuestions.length;
-        
+        document.getElementById('total-q').innerText = questionBank.length;
+        document.getElementById('mode-text').innerText = mode === 'practice' ? "Luyện tập" : "Kiểm tra";
         loadQuestion();
     }
 
     function loadQuestion() {
-        const q = currentQuestions[currentIndex];
-        document.getElementById('current-q').innerText = currentIndex + 1;
-        document.getElementById('question-text').innerText = q.q;
-        document.getElementById('feedback').innerText = "";
-        document.getElementById('next-btn').style.display = 'none'; 
+        const q = questionBank[index];
+        document.getElementById('cur-q').innerText = index + 1;
+        document.getElementById('question-text').innerHTML = q.q;
+        document.getElementById('feedback').innerHTML = "";
         
-        const optionsDiv = document.getElementById('options-container');
-        optionsDiv.innerHTML = '';
-        isPracticeAttempted = false; 
+        let percent = ((index) / questionBank.length) * 100;
+        document.getElementById('progress-bar').style.width = percent + '%';
 
-        q.options.forEach((opt, index) => {
+        const btn5050 = document.getElementById('btn-5050');
+        isUsed5050 = false;
+        if (q.o.length > 2) {
+            btn5050.style.display = 'block';
+            btn5050.disabled = false;
+        } else {
+            btn5050.style.display = 'none';
+        }
+
+        const area = document.getElementById('options-area');
+        area.innerHTML = "";
+
+        q.o.forEach((opt, i) => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
-            btn.innerText = opt;
-            btn.onclick = () => handleAnswer(btn, index);
-            optionsDiv.appendChild(btn);
+            btn.innerHTML = opt;
+            btn.onclick = () => checkAnswer(btn, i);
+            btn.id = `opt-${i}`; 
+            area.appendChild(btn);
         });
+
+        const nextBtn = document.getElementById('next-btn');
+        if(currentMode === 'practice') {
+            nextBtn.style.display = 'none'; // Luyện tập: chọn đúng mới hiện
+        } else {
+            nextBtn.style.display = 'block'; // Kiểm tra: luôn hiện để skip
+        }
     }
 
-    function handleAnswer(btn, selectedIndex) {
-        const correctIndex = currentQuestions[currentIndex].ans;
+    function use5050() {
+        if (isUsed5050) return;
+        const q = questionBank[index];
+        const correct = q.a;
+        let removed = 0;
+        
+        let wrongIndices = [];
+        for (let i = 0; i < q.o.length; i++) {
+            if (i !== correct) wrongIndices.push(i);
+        }
+
+        while (removed < 2 && wrongIndices.length > 0) {
+            const r = Math.floor(Math.random() * wrongIndices.length);
+            const idxToRemove = wrongIndices[r];
+            
+            const btn = document.getElementById(`opt-${idxToRemove}`);
+            if (btn) {
+                btn.classList.add('hidden-opt');
+            }
+            
+            wrongIndices.splice(r, 1);
+            removed++;
+        }
+        
+        isUsed5050 = true;
+        document.getElementById('btn-5050').disabled = true;
+    }
+
+    function checkAnswer(btn, i) {
+        const q = questionBank[index];
+        const correct = q.a;
 
         if (currentMode === 'practice') {
-            if (selectedIndex === correctIndex) {
+            if (i === correct) {
                 btn.classList.add('correct');
-                document.getElementById('feedback').innerText = "🎉 Chính xác!";
-                document.getElementById('feedback').style.color = "var(--correct-text)";
-                disableAllOptions();
-                document.getElementById('next-btn').style.display = 'block'; 
-                if (!isPracticeAttempted) score++;
-                userAnswers.push({q: currentIndex, user: selectedIndex, correct: correctIndex});
+                document.getElementById('feedback').innerHTML = "✅ Chính xác!";
+                document.getElementById('feedback').style.color = "var(--correct-color)";
+                disableOpts();
+                document.getElementById('next-btn').style.display = 'block';
+                score++;
+                userAns.push({q: index, u: i, c: correct});
             } else {
                 btn.classList.add('wrong');
-                document.getElementById('feedback').innerText = "❌ Sai rồi, hãy chọn lại!";
-                document.getElementById('feedback').style.color = "var(--wrong-text)";
-                isPracticeAttempted = true; 
+                document.getElementById('feedback').innerHTML = "❌ Sai rồi!";
+                document.getElementById('feedback').style.color = "var(--wrong-color)";
             }
-        } else if (currentMode === 'exam') {
-            const allBtns = document.querySelectorAll('.option-btn');
-            allBtns.forEach(b => b.classList.remove('selected'));
+        } else {
+            const btns = document.querySelectorAll('.option-btn');
+            btns.forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
-            document.getElementById('next-btn').style.display = 'block';
-            currentQuestions[currentIndex].userSelected = selectedIndex;
+            q.tempAns = i;
         }
     }
 
     function nextQuestion() {
         if (currentMode === 'exam') {
-            const selected = currentQuestions[currentIndex].userSelected;
-            const correct = currentQuestions[currentIndex].ans;
-            
-            if (selected === undefined) {
-                alert("Vui lòng chọn một đáp án!");
-                return;
+            const q = questionBank[index];
+            if (q.tempAns !== undefined) {
+                if (q.tempAns === q.a) score++;
+                userAns.push({q: index, u: q.tempAns, c: q.a});
+            } else {
+                userAns.push({q: index, u: -1, c: q.a});
             }
-            userAnswers.push({q: currentIndex, user: selected, correct: correct});
-            if (selected === correct) score++;
         }
 
-        currentIndex++;
-        if (currentIndex < currentQuestions.length) {
+        index++;
+        if (index < questionBank.length) {
             loadQuestion();
         } else {
-            showResults();
+            finish();
         }
     }
 
-    function disableAllOptions() {
+    function disableOpts() {
         const btns = document.querySelectorAll('.option-btn');
         btns.forEach(b => b.disabled = true);
     }
 
-    function showResults() {
+    function finish() {
         document.getElementById('quiz-screen').style.display = 'none';
         document.getElementById('result-screen').style.display = 'block';
-
-        const total = currentQuestions.length;
-        const scoreOn10 = (score / total) * 10;
-        document.getElementById('final-score').innerText = scoreOn10.toFixed(1);
+        
+        const finalScore = (score / questionBank.length) * 10;
+        document.getElementById('score-num').innerText = finalScore.toFixed(1);
 
         const list = document.getElementById('review-list');
-        list.innerHTML = '';
+        list.innerHTML = "";
         
-        userAnswers.forEach((item, idx) => {
-            const qData = currentQuestions[idx];
+        userAns.forEach((item, idx) => {
+            const qData = questionBank[item.q];
             const div = document.createElement('div');
             div.className = 'review-item';
+            const isRight = item.u === item.c;
             
-            const isCorrect = item.user === item.correct;
-            // Màu sắc kết quả trong review cũng theo theme
-            div.style.color = isCorrect ? "var(--correct-text)" : "var(--wrong-text)";
-            
-            let html = `<strong>Câu ${idx + 1}:</strong> ${qData.q}<br>`;
-            html += `Bạn chọn: ${qData.options[item.user]} <br>`;
-            
-            if (!isCorrect) {
-                html += `Đáp án đúng: <b>${qData.options[item.correct]}</b>`;
-            } else {
-                html += `Kết quả: Chính xác`;
-            }
-            div.innerHTML = html;
+            div.innerHTML = `
+                <div style="font-weight:bold; margin-bottom:5px;">Câu ${item.q + 1} (${isRight ? '<span class="good">Đúng</span>' : '<span class="bad">Sai</span>'})</div>
+                <div style="margin-bottom:5px;">${qData.q}</div>
+                <div style="font-size:0.9rem; color: #666;">
+                    Bạn chọn: ${item.u === -1 ? 'Bỏ qua' : qData.o[item.u]} <br>
+                    ${!isRight ? `<span class="good">Đáp án đúng: ${qData.o[item.c]}</span>` : ''}
+                </div>
+            `;
             list.appendChild(div);
         });
     }
